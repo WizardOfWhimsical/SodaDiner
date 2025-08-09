@@ -1,0 +1,47 @@
+{
+  "name": "SodaDiner",
+  "version": "4.2.0",
+  "main": "server.js",
+  "keywords": [],
+  "author": "Stephen Lewis",
+  "license": "ISC",
+  "description": "Let's Go!!",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "startDev": "nodemon server.js",
+    "clp": "node CLProc/trigger.js",
+    "prettier": "prettier --write ./**",
+    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
+    "test": " mocha -R list",
+    "model": "mocha */model.test.js",
+    "controller": "mocha */controller.test.js",
+    "route": "mocha */route.test.js",
+    "crud": "mongorestore --uri mongodb://localhost:27017/SodaDinerTest --drop dumpedDB/tests && ENV=test mocha */cruds",
+    "allTest": "mongorestore --uri mongodb://localhost:27017/SodaDinerTest --drop dumpedDB/tests && ENV=test mocha _test_ */cruds",
+    "inspect": "nodemon --inspect server.js",
+    "dumpDev": "mongodump --uri mongodb://localhost:27017/SodaDiner --out dumpedDB/developer",
+    "restoreDev": "mongorestore --uri mongodb://localhost:27017/SodaDiner --drop dumpedDB/developer",
+    "dumpTest": "mongodump --uri mongodb://localhost:27017/SodaDinerTest --out dumpedDB/tests",
+    "restoreTest": "mongorestore --uri mongodb://localhost:27017/SodaDinerTest --drop dumpedDB/tests"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "inquirer": "^9.2.19",
+    "mongoose": "^8.2.4"
+  },
+  "devDependencies": {
+    "mocha": "^10.4.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.0",
+    "prettier": "^3.2.5"
+  },
+  "imports": {
+    "#config": "./config.js",
+    "#Models/*": "./models/*.model.js",
+    "#Controllers/*": "./controllers/*.control.js",
+    "#Routes/*": "./routes/*.route.js",
+    "#Resp": "./_test_/cruds/dummyRes.js",
+    "#Connect": "./monCon.js"
+  }
+}

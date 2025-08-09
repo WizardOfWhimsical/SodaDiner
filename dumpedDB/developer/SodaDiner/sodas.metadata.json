@@ -1,0 +1,7 @@
+{
+  "options": {},
+  "indexes": [
+    { "v": 2, "key": { "_id": 1 }, "name": "_id_", "ns": "SodaDiner.sodas" }
+  ],
+  "uuid": "aa5b5ef0e4f048a5929f4748b7662209"
+}

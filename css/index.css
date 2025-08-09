@@ -1,0 +1,29 @@
+header {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+}
+
+nav > ul {
+  display: inline-flex;
+  float: right;
+  padding: 8%;
+}
+
+nav > ul > li {
+  margin: 0 2em;
+  list-style: none;
+}
+
+nav > ul > li > a {
+  color: #faa305;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.logo {
+  width: 30%;
+}
+
+div > h1 {
+  text-align: center;
+}

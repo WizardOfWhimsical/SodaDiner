@@ -1,0 +1,100 @@
+header {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+}
+
+nav > ul {
+  display: inline-flex;
+  float: right;
+  padding: 8%;
+}
+
+nav > ul > li {
+  margin: 0 2em;
+  list-style: none;
+}
+
+nav > ul > li > a {
+  color: #faa305;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.logo {
+  width: 30%;
+}
+
+form {
+  width: 50%;
+  margin: 0px auto;
+}
+
+input {
+  margin-bottom: 1% !important;
+}
+
+section {
+  text-align: center;
+}
+
+.sub-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 40%;
+  margin: 0 auto;
+  grid-column-gap: 1em;
+}
+
+.add-btn {
+  margin-top: 1%;
+}
+
+.select-input {
+  width: 40% !important;
+  margin: 0 auto;
+}
+
+.diner-link {
+  color: black;
+}
+
+.location-container {
+  display: grid;
+  grid-template-columns: 1fr 0fr;
+  background-color: #80808040;
+  padding: 1%;
+}
+
+/* .deleteBtn {
+    width: 25%;
+    margin-left: 75%;
+    height: 8vh; */
+
+.info {
+  text-align: left;
+}
+
+#name {
+  text-align: left;
+}
+
+.edit-input {
+  width: 20vw;
+  border: 1px solid #dbdbdb;
+}
+
+.bottom-container {
+  background-color: #80808040;
+  padding: 1%;
+}
+
+.bottom-container > button {
+  margin: 0 auto;
+}
+
+#sodas > li {
+  margin: 1em 1em;
+  border-bottom: 1px solid #dfdfdf;
+  display: grid;
+  grid-template-columns: 1fr 0fr;
+}

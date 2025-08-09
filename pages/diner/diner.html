@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Soda Diner Assigment</title>
+    <link rel="stylesheet" href="/css/diner.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.tlm.cloud/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <header>
+      <a href="../../index.html">
+        <img src="/assets/images/thirstyMongooseLogo.svg" class="logo" />
+      </a>
+      <nav>
+        <ul>
+          <li><a href="../soda/sodas.html">All Sodas</a></li>
+          <li><a href="../diner/diners.html">All Diners</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section>
+      <h2>Diner: <span id="title"></span></h2>
+      <hr />
+      <div class="container">
+        <div class="location-container">
+          <h4 id="name"></h4>
+          <button id="deleteDiner" class="btn btn-danger deleteBtn">
+            Delete
+          </button>
+        </div>
+        <div class="info">
+          <h5>Location: <span id="location"></span></h5>
+          <h5>Sodas being served:</h5>
+          <div id="sodas"></div>
+        </div>
+        <div class="bottom-container">
+          <a href="./addSoda.html">
+            <button class="btn btn-success deleteBtn">Add a Soda</button>
+          </a>
+          <button id="editDiner" class="btn btn-success deleteBtn">
+            Edit Diner
+          </button>
+        </div>
+      </div>
+    </section>
+    <script
+      src="https://cdn.tlm.cloud/jquery/3.3.1/jquery-3.3.1.min.js"
+      integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.tlm.cloud/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="../../js/api/diner/getDiner.js"></script>
+    <script src="../../js/api/diner/editDiner.js"></script>
+  </body>
+</html>

@@ -1,0 +1,100 @@
+header {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+}
+
+nav > ul {
+  display: inline-flex;
+  float: right;
+  padding: 8%;
+}
+
+nav > ul > li {
+  margin: 0 2em;
+  list-style: none;
+}
+
+nav > ul > li > a {
+  color: #faa305;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.logo {
+  width: 30%;
+}
+
+section {
+  padding: 2%;
+}
+
+form {
+  width: 50%;
+  margin: 0px auto;
+}
+
+input {
+  margin-bottom: 1% !important;
+}
+
+section {
+  text-align: center;
+}
+
+.sub-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 40%;
+  margin: 0 auto;
+  grid-column-gap: 1em;
+}
+
+.add-btn {
+  margin-top: 1%;
+}
+
+.soda-link {
+  color: black;
+}
+
+.name-container {
+  display: grid;
+  grid-template-columns: 1fr 0fr;
+  padding: 1%;
+  background-color: #80808040;
+  border-radius: 4px;
+  text-align: left;
+}
+
+.commentForm {
+  width: 50% !important;
+}
+
+.comments {
+  background-color: #dfdfdf;
+  border-radius: 4px;
+  padding: 1%;
+}
+
+.info {
+  text-align: left;
+}
+
+.info > p {
+  text-align: left;
+}
+
+.edit-input {
+  width: 20vw;
+  border: 1px solid #dbdbdb;
+}
+
+#sodas {
+  width: 65%;
+  text-align: center;
+  padding: 2%;
+}
+
+#sodas > option:hover {
+  background-color: #80808040;
+}
