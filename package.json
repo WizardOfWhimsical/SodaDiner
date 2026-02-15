@@ -21,7 +21,7 @@
     "allTest": "mongorestore --uri mongodb://localhost:27017/SodaDinerTest --drop dumpedDB/tests && ENV=test mocha _test_ */cruds",
     "inspect": "nodemon --inspect server.js",
     "dumpDev": "mongodump --uri mongodb://localhost:27017/SodaDiner --out dumpedDB/developer",
-    "restoreDev": "mongorestore --uri mongodb://localhost:27017/SodaDiner --drop dumpedDB/developer",
+    "restoreDev": "mongorestore --uri mongodb://localhost:27017/SodaDiner --drop dumpedDB/developer/SodaDiner",
     "dumpTest": "mongodump --uri mongodb://localhost:27017/SodaDinerTest --out dumpedDB/tests",
     "restoreTest": "mongorestore --uri mongodb://localhost:27017/SodaDinerTest --drop dumpedDB/tests"
   },
