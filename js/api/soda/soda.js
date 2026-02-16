@@ -53,17 +53,20 @@
   form.addEventListener("click", (e) => {
     // form.submit((e) => {
     e.preventDefault();
+    const target = e.target.form;
     // Data object for server parsing
+    console.log("form??\n", target);
     const data = {
       // Get name of soda and assign it to object
-      name: e.target.name.value,
+      name: target.name.value,
       // Get brand of soda and assign it to object
-      brand: e.target.brand.value,
+      brand: target.brand.value,
       // Get fizziness of soda and assign it to object
-      fizziness: e.target.fizziness.value,
+      fizziness: target.fizziness.value,
       // Get rating of soda and assign it to object
-      taste_rating: e.target.taste_rating.value,
+      taste_rating: target.taste_rating.value,
     };
+    console.log("data??\n", data);
     // Make an ajax post request to server and send
     // the data from the form object
     $.ajax({
