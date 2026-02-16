@@ -1,3 +1,4 @@
+console.log("stephen");
 (function () {
   // Immediately invoke function
   // Get Soda form
@@ -50,7 +51,7 @@
   }
 
   // Attach event handler to form
-  form.addEventListener("submit", (e) => {
+  form?.addEventListener("submit", (e) => {
     e.preventDefault();
     const target = e.target;
 
