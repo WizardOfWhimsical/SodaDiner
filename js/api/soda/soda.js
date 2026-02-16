@@ -41,17 +41,24 @@
                 </div>
             `;
     });
-    // Get each soda from the soda's container
-    const children = sodaDiv.children();
-    // Loop thru the elements inside sodaDiv
-    for (let child of children) {
-      // Assign a function for each one to create unique
-      // cookie for particular soda
-      child.onclick = function () {
-        // Create a document cookie for soda's id
-        document.cookie = `soda=${this.id}`;
-      };
-    }
+
+    sodaDiv.addEventListener("click", (e) => {
+      target = e.target.closest("div[id]");
+      console.log(target.id);
+      document.cookie = `soda=${target.id}`;
+    });
+
+    // // Get each soda from the soda's container
+    // const children = sodaDiv.children();
+    // // Loop thru the elements inside sodaDiv
+    // for (let child of children) {
+    //   // Assign a function for each one to create unique
+    //   // cookie for particular soda
+    //   child.onclick = function () {
+    //     // Create a document cookie for soda's id
+    //     document.cookie = `soda=${this.id}`;
+    //   };
+    // }
   }
 
   // Attach event handler to form
