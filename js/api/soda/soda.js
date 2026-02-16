@@ -50,10 +50,10 @@
   }
 
   // Attach event handler to form
-  form.addEventListener("click", (e) => {
+  form.addEventListener("submit", (e) => {
     // form.submit((e) => {
     e.preventDefault();
-    const target = e.target.form;
+    const target = e.target;
     // Data object for server parsing
     console.log("form??\n", target);
     const data = {
