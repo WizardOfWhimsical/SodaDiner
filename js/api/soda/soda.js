@@ -43,7 +43,7 @@
     });
 
     sodaDiv.addEventListener("click", (e) => {
-      target = e.target.closest("div[id]");
+      const target = e.target.closest("div[id]");
       console.log(target.id);
       document.cookie = `soda=${target.id}`;
     });
@@ -51,37 +51,30 @@
 
   // Attach event handler to form
   form.addEventListener("submit", (e) => {
-    // form.submit((e) => {
     e.preventDefault();
     const target = e.target;
-    // Data object for server parsing
+
     console.log("form??\n", target);
     const data = {
-      // Get name of soda and assign it to object
       name: target.name.value,
-      // Get brand of soda and assign it to object
       brand: target.brand.value,
-      // Get fizziness of soda and assign it to object
       fizziness: target.fizziness.value,
-      // Get rating of soda and assign it to object
       taste_rating: target.taste_rating.value,
     };
     console.log("data??\n", data);
-    // Make an ajax post request to server and send
-    // the data from the form object
-    $.ajax({
-      type: "POST",
-      url: apiServerSoda,
-      data: data,
+
+    fetch(apiServerSoda, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
     })
-      .done((msg) => {
+      .then((msg) => {
         alert("Successfully saved!");
         window.location = "./sodas.html";
       })
-      .catch((err) =>
-        alert(
-          "Oops, something went wrong! Make sure to fill out all fields in the form.",
-        ),
-      );
+      .catch((err) => {
+        console.log("error\n", err);
+        alert("Oops, something went wrong!");
+      });
   });
 })();
