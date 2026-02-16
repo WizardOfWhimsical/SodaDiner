@@ -17,6 +17,10 @@ switch (process.env.ENV) {
     config.db = "SodaDiner";
 }
 
-config.dbUrl = `mongodb://${config.dbHost}:${config.dbPort}/${config.db}`;
+if (process.env.DB_URI) {
+  config.dbUrl = process.env.DB_URI;
+} else {
+  config.dbUrl = `mongodb://${config.dbHost}:${config.dbPort}/${config.db}`;
+}
 
 export default config;
