@@ -1,11 +1,18 @@
 (function () {
   // Immediately invoke function
   // Get Soda form
+  const form = document.getElementById("soda-form");
   const $form = $("#soda-form");
   // Declare api server for soda
   const apiServerSoda = "http://localhost:3000/sodas";
   // Get the sodas for soda form
   function getSodas() {
+    fetch(apiServerSoda)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        renderSodas(data);
+      });
     // Get sodas
     $.ajax({
       type: "GET",
