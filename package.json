@@ -8,8 +8,8 @@
   "description": "Let's Go!!",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "startDev": "nodemon server.js",
+    "start": "node --env-file=.env server.js",
+    "dev": "node --watch --env-file=.env server.js",
     "clp": "node CLProc/trigger.js",
     "prettier": "prettier --write ./**",
     "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
