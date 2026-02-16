@@ -11,7 +11,8 @@
       .then((data) => {
         console.log(data);
         renderSodas(data);
-      });
+      })
+      .catch((err) => console.log(err));
   }
   // Call api sodas
   getSodas();
@@ -49,7 +50,8 @@
   }
 
   // Attach event handler to form
-  form.submit((e) => {
+  form.addEventListener("submit", (e) => {
+    // form.submit((e) => {
     e.preventDefault();
     // Data object for server parsing
     const data = {
