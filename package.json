@@ -8,8 +8,8 @@
   "description": "Let's Go!!",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "startDev": "nodemon server.js",
+    "start": "node --env-file=.env server.js",
+    "dev": "node --watch --env-file=.env server.js",
     "clp": "node CLProc/trigger.js",
     "prettier": "prettier --write ./**",
     "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
@@ -33,7 +33,6 @@
   "devDependencies": {
     "mocha": "^10.4.0",
     "morgan": "^1.10.0",
-    "nodemon": "^3.1.0",
     "prettier": "^3.2.5"
   },
   "imports": {
