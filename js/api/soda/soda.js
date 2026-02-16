@@ -7,9 +7,14 @@
   // Get the sodas for soda form
   function getSodas() {
     fetch(apiServerSoda)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return res.json();
+      })
       .then((data) => {
-        console.log(data);
+        console.log("fetch success\n", data);
         renderSodas(data);
       })
       .catch((err) => console.log(err));
@@ -50,7 +55,7 @@
   }
 
   // Attach event handler to form
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("click", (e) => {
     // form.submit((e) => {
     e.preventDefault();
     // Data object for server parsing
