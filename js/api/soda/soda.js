@@ -2,7 +2,6 @@
   // Immediately invoke function
   // Get Soda form
   const form = document.getElementById("soda-form");
-  const $form = $("#soda-form");
   // Declare api server for soda
   const apiServerSoda = "http://localhost:3000/sodas";
   // Get the sodas for soda form
@@ -13,38 +12,31 @@
         console.log(data);
         renderSodas(data);
       });
-    // Get sodas
-    $.ajax({
-      type: "GET",
-      url: apiServerSoda,
-    }).done((res) => {
-      console.log(res);
-      // Render option elements for soda
-      renderSodas(res);
-    });
   }
   // Call api sodas
   getSodas();
+
   // Render sodas from the ajax request
   function renderSodas({ sodas }) {
-    const $sodaDiv = $("#sodas");
+    const sodaDiv = document.getElementById("sodas");
+
     // Check to see if there are any sodas
     if (sodas.length === 0)
-      return $sodaDiv.append("<h3>There are no sodas</h3>");
+      return sodaDiv.append("<h3>There are no sodas</h3>");
     // Loop through the sodas array
     sodas.map((soda, idx) => {
       // Append new elements under sodas' container
-      $sodaDiv.append(`
+      sodaDiv.innerHTML += `
                 <div id=${soda._id}>
                     <h5>
                         <a class="soda-link" 
                             href="./soda.html">${soda.name}</a>
                     </h5>
                 </div>
-            `);
+            `;
     });
     // Get each soda from the soda's container
-    const children = $sodaDiv.children();
+    const children = sodaDiv.children();
     // Loop thru the elements inside sodaDiv
     for (let child of children) {
       // Assign a function for each one to create unique
@@ -55,8 +47,9 @@
       };
     }
   }
+
   // Attach event handler to form
-  $form.submit((e) => {
+  form.submit((e) => {
     e.preventDefault();
     // Data object for server parsing
     const data = {
