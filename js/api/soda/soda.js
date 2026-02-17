@@ -1,11 +1,7 @@
 console.log("stephen");
 (function () {
-  // Immediately invoke function
-  // Get Soda form
   const form = document.getElementById("soda-form");
-  // Declare api server for soda
   const apiServerSoda = "http://localhost:3000/sodas";
-  // Get the sodas for soda form
   function getSodas() {
     fetch(apiServerSoda)
       .then((res) => {
@@ -20,20 +16,18 @@ console.log("stephen");
       })
       .catch((err) => console.log(err));
   }
-  // Call api sodas
+
   getSodas();
 
-  // Render sodas from the ajax request
   function renderSodas({ sodas }) {
     const sodaDiv = document.getElementById("sodas");
 
-    // Check to see if there are any sodas
-    if (sodas.length === 0)
+    if (sodas.length === 0) {
       return sodaDiv.append("<h3>There are no sodas</h3>");
-    // Loop through the sodas array
+    }
+    let content = "";
     sodas.map((soda) => {
-      // Append new elements under sodas' container
-      sodaDiv.innerHTML += `
+      content += `
                 <div id=${soda._id}>
                     <h5>
                         <a class="soda-link" 
@@ -42,7 +36,7 @@ console.log("stephen");
                 </div>
             `;
     });
-
+    sodaDiv.innerHTML = content;
     sodaDiv.addEventListener("click", (e) => {
       const target = e.target.closest("div[id]");
       console.log(target.id);
@@ -50,19 +44,16 @@ console.log("stephen");
     });
   }
 
-  // Attach event handler to form
   form?.addEventListener("submit", (e) => {
     e.preventDefault();
     const target = e.target;
 
-    console.log("form??\n", target);
     const data = {
       name: target.name.value,
       brand: target.brand.value,
       fizziness: target.fizziness.value,
       taste_rating: target.taste_rating.value,
     };
-    console.log("data??\n", data);
 
     fetch(apiServerSoda, {
       method: "POST",
