@@ -8,20 +8,14 @@
     .find((cookie) => cookie.startsWith("soda"))
     .split("=")[1];
 
-  // Url for soda's information
   const sodaApi = "http://localhost:3000/soda/" + sodaID;
-  // Declare api for serve soda
+
   const apiServerUpdateSoda = "http://localhost:3000/soda/updateSoda/" + sodaID;
 
-  // Update soda BTN
   const serveSoda = document.getElementById("serveSoda");
 
-  // Status for soda (if being served)
-  // const $served = $("#served");
   const serve = document.getElementById("served");
 
-  // Delete Soda button
-  // const $deleteBtn = $("#deleteSoda");
   const deleteBtn = document.getElementById("deleteSoda");
 
   // Make soda ajax request
@@ -42,8 +36,9 @@
       console.log("errorCatch for GET\n", err);
     });
 
-  const renderSoda = ({ name, brand, fizziness, rating, served }) => {
-    // console.log("inside render\n", served);
+  function renderSoda({ name, brand, fizziness, rating, served }) {
+    const log = { name, brand, fizziness, rating, served };
+    console.log("inside render\n", log);
     const $title = $("#title");
     const $name = $("#name");
     const $brand = $("#brand");
@@ -62,7 +57,7 @@
       : (serveSoda.textContent = "Stop serving soda");
 
     window.served = served;
-  };
+  }
 
   // A function to update serving option
   function updateSoda() {
