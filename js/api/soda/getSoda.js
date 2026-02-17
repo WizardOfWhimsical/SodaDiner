@@ -14,12 +14,11 @@
   const apiServerUpdateSoda = "http://localhost:3000/soda/updateSoda/" + sodaID;
 
   // Update soda BTN
-  // const $serveSoda = $("#serveSoda");
   const serveSoda = document.getElementById("serveSoda");
 
   // Status for soda (if being served)
-  const $served = $("#served");
-  // const served = document.getElementById("served");
+  // const $served = $("#served");
+  const serve = document.getElementById("served");
 
   // Delete Soda button
   const $deleteBtn = $("#deleteSoda");
@@ -41,6 +40,7 @@
     .catch((err) => $("section").text("Please choose a soda"));
 
   const renderSoda = ({ name, brand, fizziness, rating, served }) => {
+    // console.log("inside render\n", served);
     const $title = $("#title");
     const $name = $("#name");
     const $brand = $("#brand");
@@ -52,15 +52,16 @@
     $brand.text(brand);
     $fizziness.text(fizziness);
     $rating.text(rating);
-    $served.text(served);
+    serve.textContent = `${served}`;
 
     // Check value of soda and provide conditions to serve or stop serving
-    if (served === false) {
-      serveSoda.textContent = "Serve soda";
-    } else {
-      serveSoda.textContent = "Stop serving soda";
-    }
-
+    // serveSoda.textContent = served ? "Stop serving soda" : "Serve soda";
+    // if (served === false) {
+    //   serveSoda.textContent = "Serve soda";
+    // } else {
+    //   serveSoda.textContent = "Stop serving soda";
+    // }
+    serveSoda.addEventListener("click", updateSoda);
     // Assinged served value to window object
     window.served = served;
   };
@@ -80,14 +81,12 @@
       .done((res) => {
         console.log(res);
         const { serving } = res;
-        if (serving === "true") {
-          $(this).replaceWith("<b>This soda is now being served</b>");
-          $served.text("true");
+        if (!serving) {
+          serve.textContent = "false";
+          serveSoda.textContent = "Serve soda";
         } else {
-          $(this).replaceWith(
-            "<b> This soda is not being served any more </b>",
-          );
-          $served.text("false");
+          serve.textContent = "true";
+          serveSoda.textContent = "Stop serving soda";
         }
       })
       .catch((err) => console.log(err));
