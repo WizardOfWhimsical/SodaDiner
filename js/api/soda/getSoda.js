@@ -38,39 +38,30 @@
     });
 
   function renderSoda({ name, brand, fizziness, rating, served }) {
-    const log = { name, brand, fizziness, rating, served };
-    console.log("inside render\n", log);
-
-    // const $title = $("#title");
-    // const $name = $("#name");
-    // const $brand = $("#brand");
-    // const $fizziness = $("#fizziness");
-    // const $rating = $("#rating");
     const showTitle = document.getElementById("title");
     const showName = document.getElementById("name");
     const showBrand = document.getElementById("brand");
     const showFizz = document.getElementById("fizziness");
     const showRating = document.getElementById("rating");
-    // Assign these elements with the values from the soda object
+
     showTitle.textContent = name;
     showName.textContent = name;
     showBrand.textContent = brand;
     showFizz.textContent = fizziness;
     showRating.textContent = rating;
-    serve.textContent = `${served}`;
+    serve.textContent = served;
 
     !served
       ? (serveSoda.textContent = "Serve soda")
       : (serveSoda.textContent = "Stop serving soda");
 
-    window.served = served;
+    serveSoda.addEventListener("click", updateSoda);
   }
 
   // A function to update serving option
   function updateSoda() {
-    // Get value of serving soda
     const serving = window.served;
-    // Update the serving object by toggling the value between true or false
+    // switch values right here
     const updateValue = serving ? false : true;
 
     $.ajax({
@@ -92,9 +83,9 @@
       .catch((err) => console.log("errorCatch in PUT\n", err));
   }
 
-  // Add event listener to serve soda button
-  serveSoda.addEventListener("click", updateSoda);
-  //
+  // Add event listener to delete soda button
+  deleteBtn.addEventListener("click", deleteSoda);
+
   function deleteSoda() {
     $.ajax({
       type: "DELETE",
@@ -106,7 +97,4 @@
       })
       .catch((err) => console.log("errorCatch in DELETE\n", err));
   }
-
-  // Add event listener to delete soda button
-  deleteBtn.addEventListener("click", deleteSoda);
 })();
