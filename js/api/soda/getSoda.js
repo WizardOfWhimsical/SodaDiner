@@ -61,7 +61,6 @@
     // } else {
     //   serveSoda.textContent = "Stop serving soda";
     // }
-    serveSoda.addEventListener("click", updateSoda);
     // Assinged served value to window object
     window.served = served;
   };
@@ -81,11 +80,14 @@
       .done((res) => {
         console.log(res);
         const { serving } = res;
+        console.log("inside update\n", serving);
+        window.served = serving;
+        // goes from true to false or false to true but gets stuck in that state??
         if (!serving) {
-          serve.textContent = "false";
+          serve.textContent = `${serving}`;
           serveSoda.textContent = "Serve soda";
         } else {
-          serve.textContent = "true";
+          serve.textContent = `${serving}`;
           serveSoda.textContent = "Stop serving soda";
         }
       })
