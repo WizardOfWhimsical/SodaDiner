@@ -13,17 +13,17 @@
   // Declare api for serve soda
   const apiServerUpdateSoda = "http://localhost:3000/soda/updateSoda/" + sodaID;
 
-  // Update soda button
+  // Update soda BTN
   // const $serveSoda = $("#serveSoda");
   const serveSoda = document.getElementById("serveSoda");
 
   // Status for soda (if being served)
-  // const $served = $("#served");
-  const served = document.getElementById("served");
+  const $served = $("#served");
+  // const served = document.getElementById("served");
 
   // Delete Soda button
-  // const $deleteBtn = $("#deleteSoda");
-  const deleteBtn = document.getElementById("deleteSoda");
+  const $deleteBtn = $("#deleteSoda");
+  // const deleteBtn = document.getElementById("deleteSoda");
 
   // Make soda ajax request
   $.ajax({
@@ -56,9 +56,9 @@
 
     // Check value of soda and provide conditions to serve or stop serving
     if (served === false) {
-      serveSoda.text("Serve soda");
+      serveSoda.textContent = "Serve soda";
     } else {
-      serveSoda.text("Stop serving soda");
+      serveSoda.textContent = "Stop serving soda";
     }
 
     // Assinged served value to window object
@@ -94,7 +94,7 @@
   }
 
   // Add event listener to serve soda button
-  serveSoda.on("click", updateSoda);
+  serveSoda.addEventListener("click", updateSoda);
 
   function deleteSoda() {
     $.ajax({
