@@ -17,6 +17,7 @@
   const serve = document.getElementById("served");
 
   const deleteBtn = document.getElementById("deleteSoda");
+  const section = document.getElementsByName("section");
 
   // Make soda ajax request
   $.ajax({
@@ -25,14 +26,14 @@
   })
     .done((res) => {
       if (!res.soda) {
-        $("section").text("Please choose a soda");
+        section.textContent = "Please choose a soda";
       } else {
         // Render soda in UI
         renderSoda(res.soda);
       }
     })
     .catch((err) => {
-      $("section").text("Please choose a soda");
+      section.textContent = "Please choose a soda";
       console.log("errorCatch for GET\n", err);
     });
 
@@ -40,22 +41,22 @@
     const log = { name, brand, fizziness, rating, served };
     console.log("inside render\n", log);
 
-    const $title = $("#title");
+    // const $title = $("#title");
+    // const $name = $("#name");
+    // const $brand = $("#brand");
+    // const $fizziness = $("#fizziness");
+    // const $rating = $("#rating");
     const showTitle = document.getElementById("title");
-    const $name = $("#name");
     const showName = document.getElementById("name");
-    const $brand = $("#brand");
     const showBrand = document.getElementById("brand");
-    const $fizziness = $("#fizziness");
     const showFizz = document.getElementById("fizziness");
-    const $rating = $("#rating");
     const showRating = document.getElementById("rating");
     // Assign these elements with the values from the soda object
-    $title.text(name);
-    $name.text(name);
-    $brand.text(brand);
-    $fizziness.text(fizziness);
-    $rating.text(rating);
+    showTitle.textContent = name;
+    showName.textContent = name;
+    showBrand.textContent = brand;
+    showFizz.textContent = fizziness;
+    showRating.textContent = rating;
     serve.textContent = `${served}`;
 
     !served
