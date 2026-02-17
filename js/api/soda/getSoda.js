@@ -52,7 +52,7 @@
     $brand.text(brand);
     $fizziness.text(fizziness);
     $rating.text(rating);
-    serve.textContent = `${served}`;
+    serve.textContent = `${served} right here`;
 
     // Check value of soda and provide conditions to serve or stop serving
     // serveSoda.textContent = served ? "Stop serving soda" : "Serve soda";
@@ -62,6 +62,11 @@
     //   serveSoda.textContent = "Stop serving soda";
     // }
     // Assinged served value to window object
+
+    !served
+      ? (serveSoda.textContent = "Serve soda")
+      : (serveSoda.textContent = "Stop serving soda");
+
     window.served = served;
   };
 
@@ -69,8 +74,10 @@
   function updateSoda() {
     // Get value of serving soda
     const serving = window.served;
+    console.log("inside before Ajax\n", serving);
     // Update the serving object by toggling the value between true or false
     const updateValue = serving ? false : true;
+    console.log("update value\n", typeof updateValue);
 
     $.ajax({
       type: "PUT",
@@ -78,17 +85,21 @@
       data: { serving: updateValue },
     })
       .done((res) => {
-        console.log(res);
+        // res is string
         const { serving } = res;
+        console.log("response\n", res);
         console.log("inside update\n", serving);
-        window.served = serving;
+
+        window.served = updateValue;
         // goes from true to false or false to true but gets stuck in that state??
-        if (!serving) {
-          serve.textContent = `${serving}`;
-          serveSoda.textContent = "Serve soda";
-        } else {
+        if (updateValue) {
+          console.log("if true:", updateValue);
           serve.textContent = `${serving}`;
           serveSoda.textContent = "Stop serving soda";
+        } else {
+          console.log("else false:", serving);
+          serve.textContent = `${serving}`;
+          serveSoda.textContent = "Serve soda";
         }
       })
       .catch((err) => console.log(err));
@@ -96,7 +107,7 @@
 
   // Add event listener to serve soda button
   serveSoda.addEventListener("click", updateSoda);
-
+  //
   function deleteSoda() {
     $.ajax({
       type: "DELETE",
