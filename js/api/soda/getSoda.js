@@ -39,11 +39,17 @@
   function renderSoda({ name, brand, fizziness, rating, served }) {
     const log = { name, brand, fizziness, rating, served };
     console.log("inside render\n", log);
+
     const $title = $("#title");
+    const showTitle = document.getElementById("title");
     const $name = $("#name");
+    const showName = document.getElementById("name");
     const $brand = $("#brand");
+    const showBrand = document.getElementById("brand");
     const $fizziness = $("#fizziness");
+    const showFizz = document.getElementById("fizziness");
     const $rating = $("#rating");
+    const showRating = document.getElementById("rating");
     // Assign these elements with the values from the soda object
     $title.text(name);
     $name.text(name);
