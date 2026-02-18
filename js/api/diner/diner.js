@@ -36,14 +36,15 @@
 
   // Function render soda elements
   function renderOptionElements({ sodas }) {
+    // console.log("sodas rendered options menu", sodas);
     if (sodas.length === 0) {
       return (sodasContainer.innerHTML = `<h4> There are no sodas being served at the moment </h4>`);
     }
-    let container = "";
     // Loop thru the data
-    for (let obj of sodas) {
-      container += `<option value=${obj._id}> ${obj.name} </option>`;
-    }
+    let container = "";
+    sodas.map((soda) => {
+      container += `<option value=${soda._id}> ${soda.name} </option>`;
+    });
     sodasContainer.innerHTML = container;
   }
 
@@ -52,23 +53,23 @@
     fetch(apiServerDiners)
       .then((res) => {
         if (!res.ok) {
-          throw new Error("getSodas\n", res);
+          throw new Error("getDiners\n", res);
         }
         return res.json();
       })
       .then((data) => {
         renderDiners(data);
       })
-      .catch((err) => console.log(err, "Something went wrong fetching sodas"));
+      .catch((err) => console.log(err, "Something went wrong fetching diners"));
 
-    // Get sodas
-    $.ajax({
-      type: "GET",
-      url: apiServerDiners,
-    }).done((res) => {
-      // Render option elements for soda
-      renderDiners(res);
-    });
+    // // Get sodas
+    // $.ajax({
+    //   type: "GET",
+    //   url: apiServerDiners,
+    // }).done((res) => {
+    //   // Render option elements for soda
+    //   renderDiners(res);
+    // });
   }
 
   // Render diners on page
