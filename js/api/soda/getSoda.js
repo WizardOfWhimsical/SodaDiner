@@ -19,8 +19,6 @@
   const deleteBtn = document.getElementById("deleteSoda");
   const section = document.getElementsByName("section");
 
-  // Make soda ajax request
-
   fetch(sodaApi)
     .then((res) => {
       if (!res.ok) {
@@ -91,11 +89,17 @@
   deleteBtn.addEventListener("click", deleteSoda);
 
   function deleteSoda() {
-    $.ajax({
-      type: "DELETE",
-      url: sodaApi,
+    fetch(sodaApi, {
+      method: "DELETE",
     })
-      .done((res) => {
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("deleting soda failed\n", res);
+        }
+        return res.json();
+      })
+      .then((res) => {
+        console.log(res);
         alert("Soda successfully deleted!");
         window.location = "./sodas.html";
       })
