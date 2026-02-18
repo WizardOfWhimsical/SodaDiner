@@ -16,6 +16,7 @@
   const apiServerSoda = "http://localhost:3000/sodas/serving";
 
   // Get the sodas for soda form
+  // if invoked immediatly why not just run the code?
   function getSodas() {
     // Get sodas
     fetch(apiServerSoda)
@@ -32,6 +33,7 @@
   }
 
   // Call api sodas
+  // this is erroring becuase we are not needing it till page change
   getSodas();
 
   // Function render soda elements
@@ -41,11 +43,11 @@
       return (sodasContainer.innerHTML = `<h4> There are no sodas being served at the moment </h4>`);
     }
     // Loop thru the data
-    let container = "";
+    let contents = "";
     sodas.map((soda) => {
-      container += `<option value=${soda._id}> ${soda.name} </option>`;
+      contents += `<option value=${soda._id}> ${soda.name} </option>`;
     });
-    sodasContainer.innerHTML = container;
+    sodasContainer.innerHTML = contents;
   }
 
   // Request all diners from server
@@ -65,33 +67,32 @@
 
   // Render diners on page
   function renderDiners({ diners }) {
-    const $dinerDiv = $("#diners");
+    // const $dinerDiv = $("#diners");
+    const dinerDiv = document.getElementById("diners");
     // Check to see if there are any sodas
-    if (diners.length === 0)
-      return $dinerDiv.append("<h3>There are no diners</h3>");
+    // cant i shortCircut these?
+    if (diners.length === 0) {
+      return (dinerDiv.innerHTML = "<h3>There are no diners</h3>");
+    }
+
     // Loop through the sodas array
-    diners.map((diner, idx) => {
+    let contents = "";
+    diners.map((diner) => {
       // Append new elements under sodas' container
-      $dinerDiv.append(`
-                 <div id=${diner._id}>
+      contents += ` <div id=${diner._id}>
                      <h5>
                          <a class="diner-link"
                              href="./diner.html">${diner.name}</a>
                      </h5>
-                 </div>
-             `);
+                 </div> `;
     });
-    // Get each soda from the soda's container
-    const children = $dinerDiv.children();
-    // Loop thru the elements inside sodaDiv
-    for (let child of children) {
-      // Assign a function for each one to create unique
-      // cookie for particular soda
-      child.onclick = function () {
-        // Create a document cookie for soda's id
-        document.cookie = `diner=${this.id}`;
-      };
-    }
+    dinerDiv.innerHTML = contents;
+
+    dinerDiv.addEventListener("click", (e) => {
+      const target = e.target.closest("div[id]");
+      console.log(target.id);
+      document.cookie = `diner=${target.id}`;
+    });
   }
 
   // Call diners
