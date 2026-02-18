@@ -49,6 +49,18 @@
 
   // Request all diners from server
   function getDiners() {
+    fetch(apiServerDiners)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("getSodas\n", res);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        renderDiners(data);
+      })
+      .catch((err) => console.log(err, "Something went wrong fetching sodas"));
+
     // Get sodas
     $.ajax({
       type: "GET",
