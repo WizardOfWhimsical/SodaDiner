@@ -36,31 +36,20 @@
       console.log("diners get:\n", err);
     });
 
-  // $.ajax({
-  //   type: "GET",
-  //   url: dinerApi,
-  // })
-  //   .done((res) => {
-  //     console.log(res);
-  //     if (!res.diner) {
-  //       $("section").text("Please choose a diner");
-  //     } else {
-  //       // Render soda in UI
-  //       renderDiner(res.diner);
-  //     }
-  //   })
-  //   .catch((err) => $("section").text("Please choose a diner"));
   // Render the information for Diner
-  const renderDiner = ({ name, location, sodas }) => {
-    const $title = $("#title");
-    const $name = $("#name");
-    const $location = $("#location");
+  function renderDiner({ name, location, sodas }) {
+    // const $title = $("#title");
+    // const $name = $("#name");
+    // const $location = $("#location");
+    const titleEl = document.getElementById("title");
+    const nameEl = document.getElementById("name");
+    const locationEl = document.getElementById("location");
     // Assign these elements with the values from the soda object
-    $title.text(name);
-    $name.text(name);
-    $location.text(location);
+    titleEl.textContent = name;
+    nameEl.textContent = name;
+    locationEl.textContent = location;
     renderDinerSodas(sodas);
-  };
+  }
 
   function renderDinerSodas(sodas) {
     const $sodaDiv = $("#sodas");
