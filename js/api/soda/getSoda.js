@@ -20,17 +20,17 @@
   const section = document.getElementsByName("section");
 
   // Make soda ajax request
-  $.ajax({
-    type: "GET",
-    url: sodaApi,
-  })
-    .done((res) => {
-      if (!res.soda) {
+
+  fetch(sodaApi)
+    .then((res) => {
+      if (!res.ok) {
         section.textContent = "Please choose a soda";
-      } else {
-        // Render soda in UI
-        renderSoda(res.soda);
       }
+      return res.json();
+    })
+    .then((data) => {
+      console.log("fetch success\n", data);
+      renderSoda(data.soda);
     })
     .catch((err) => {
       section.textContent = "Please choose a soda";
