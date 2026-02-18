@@ -9,24 +9,47 @@
     .split("=")[1];
   // Url for diner's information
   const dinerApi = "http://localhost:3000/diner/" + dinerID;
+
   // Delete Soda button
   // const $deleteBtn = $("#deleteDiner");
+
   const deleteBtn = document.getElementById("deleteDiner");
   // Make diner ajax request
-  $.ajax({
-    type: "GET",
-    url: dinerApi,
-  })
-    .done((res) => {
-      console.log(res);
-      if (!res.diner) {
-        $("section").text("Please choose a diner");
+
+  fetch(dinerApi)
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return res.json();
+    })
+    .then((data) => {
+      console.log(data);
+      if (!data.diner) {
+        document.querySelector("section").textContent = "Please choose a diner";
       } else {
-        // Render soda in UI
-        renderDiner(res.diner);
+        renderDiner(data.diner);
       }
     })
-    .catch((err) => $("section").text("Please choose a diner"));
+    .catch((err) => {
+      document.querySelector("section").textContent = `${err.message}`;
+      console.log("diners get:\n", err);
+    });
+
+  // $.ajax({
+  //   type: "GET",
+  //   url: dinerApi,
+  // })
+  //   .done((res) => {
+  //     console.log(res);
+  //     if (!res.diner) {
+  //       $("section").text("Please choose a diner");
+  //     } else {
+  //       // Render soda in UI
+  //       renderDiner(res.diner);
+  //     }
+  //   })
+  //   .catch((err) => $("section").text("Please choose a diner"));
   // Render the information for Diner
   const renderDiner = ({ name, location, sodas }) => {
     const $title = $("#title");
