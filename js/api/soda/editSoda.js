@@ -45,31 +45,52 @@
 
   function saveDetails() {
     // Get input elements for editing/saving new values
-    const nameVal = name.textContent;
-    const brandVal = brand.textContent;
-    const fizzinessVal = fizziness.textContent;
-    const ratingVal = rating.textContent;
+    const name = document.querySelector('input[name="name"]').value;
+    const brand = document.querySelector('input[name="brand"]').value;
+    const fizziness = document.querySelector('input[name="fizziness"]').value;
+    const rating = document.querySelector('input[name="rating"]').value;
     // Create a new soda object
     const sodaObj = {
-      name: nameVal,
-      brand: brandVal,
-      fizziness: fizzinessVal,
-      taste_rating: ratingVal,
+      name,
+      brand,
+      fizziness,
+      taste_rating: rating,
     };
+    console.log("sodaObj before fetch\n", sodaObj);
     // Send a PUT request to update the document in mongo
-    $.ajax({
-      type: "PUT",
-      url: sodaApi,
-      data: sodaObj,
+    fetch(sodaApi, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(sodaObj),
     })
-      .done((res) => {
-        // Once updated successfully, render an alert
+      .then((res) => {
+        if (!res.ok) {
+          console.log(res);
+          throw new Error("response with editing soda failed\n", res);
+        }
         alert("Updated soda!");
         location.reload();
       })
       .catch((err) => {
-        alert("Oops, something went wrong!");
         console.log(err);
+        alert("Oops, something went wrong!");
       });
+
+    // $.ajax({
+    //   type: "PUT",
+    //   url: sodaApi,
+    //   data: sodaObj,
+    // })
+    //   .done((res) => {
+    //     // Once updated successfully, render an alert
+    //     alert("Updated soda!");
+    //     location.reload();
+    //   })
+    //   .catch((err) => {
+    //     alert("Oops, something went wrong!");
+    //     console.log(err);
+    //   });
   }
 })();
