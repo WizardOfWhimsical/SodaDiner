@@ -38,29 +38,30 @@
 
   // Render the information for Diner
   function renderDiner({ name, location, sodas }) {
-    // const $title = $("#title");
-    // const $name = $("#name");
-    // const $location = $("#location");
     const titleEl = document.getElementById("title");
     const nameEl = document.getElementById("name");
     const locationEl = document.getElementById("location");
-    // Assign these elements with the values from the soda object
+
     titleEl.textContent = name;
     nameEl.textContent = name;
     locationEl.textContent = location;
+
     renderDinerSodas(sodas);
   }
 
   function renderDinerSodas(sodas) {
-    const $sodaDiv = $("#sodas");
+    // const $sodaDiv = $("#sodas");
+    const sodaDiv = document.getElementById("sodas");
     // If no sodas are being served, notify the user
-    if (sodas.length === 0) return $sodaDiv.text("No sodas are being served");
+    if (sodas.length === 0) {
+      return (sodaDiv.textContent = "No sodas are being served");
+    }
     // Otherwise, render the sodas as an option
+    let content = "";
     sodas.map((soda) => {
-      $sodaDiv.append(`
-                <li id="${soda._id}">${soda.name}</li>
-            `);
+      content += `<li id="${soda._id}">${soda.name}</li>`;
     });
+    sodaDiv.innerHTML = content;
   }
 
   // Delete soda
