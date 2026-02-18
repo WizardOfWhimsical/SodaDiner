@@ -61,15 +61,6 @@
         renderDiners(data);
       })
       .catch((err) => console.log(err, "Something went wrong fetching diners"));
-
-    // // Get sodas
-    // $.ajax({
-    //   type: "GET",
-    //   url: apiServerDiners,
-    // }).done((res) => {
-    //   // Render option elements for soda
-    //   renderDiners(res);
-    // });
   }
 
   // Render diners on page
