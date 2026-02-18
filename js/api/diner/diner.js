@@ -1,7 +1,8 @@
 (function () {
   // Immediately invoke function
   // Get Diner form
-  const $form = $("#diner-form");
+  const dinerForm = document.getElementById("diner-form");
+  // const $form = $("#diner-form");
   // Diner container
   const $dinersContainer = $("#diners-container");
   // Get sodas container for diners
@@ -93,7 +94,7 @@
   getDiners();
 
   // Attach event handler to form
-  $form.submit((e) => {
+  dinerForm?.addEventListener("submit", (e) => {
     e.preventDefault();
     // Get sodas from multiple select box
     const sodas = $("select[name='sodas']").val();
