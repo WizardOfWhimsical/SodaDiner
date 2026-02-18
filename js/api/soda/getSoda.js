@@ -29,7 +29,6 @@
       return res.json();
     })
     .then((data) => {
-      console.log("fetch success\n", data);
       renderSoda(data.soda);
     })
     .catch((err) => {
@@ -58,18 +57,23 @@
     serveSoda.addEventListener("click", updateSoda);
   }
 
-  // A function to update serving option
   function updateSoda() {
     const serving = window.served;
-    // switch values right here
     const updateValue = serving ? false : true;
 
-    $.ajax({
-      type: "PUT",
-      url: apiServerUpdateSoda,
-      data: { serving: updateValue },
+    fetch(apiServerUpdateSoda, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ serving: updateValue }),
     })
-      .done((res) => {
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("updating isServing failed\n", res);
+        }
+
+        return res.json();
+      })
+      .then((res) => {
         const { serving } = res;
         window.served = updateValue;
         if (updateValue) {
