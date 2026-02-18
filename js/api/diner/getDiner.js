@@ -10,7 +10,8 @@
   // Url for diner's information
   const dinerApi = "http://localhost:3000/diner/" + dinerID;
   // Delete Soda button
-  const $deleteBtn = $("#deleteDiner");
+  // const $deleteBtn = $("#deleteDiner");
+  const deleteBtn = document.getElementById("deleteDiner");
   // Make diner ajax request
   $.ajax({
     type: "GET",
@@ -64,5 +65,5 @@
   }
 
   // Add event listener to delete soda button
-  $deleteBtn.on("click", deleteSoda);
+  deleteBtn.addEventListener("click", deleteSoda);
 })();
