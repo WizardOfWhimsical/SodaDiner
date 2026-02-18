@@ -61,7 +61,8 @@ console.log("stephen");
       body: JSON.stringify(data),
     })
       .then((msg) => {
-        alert("Successfully saved!");
+        console.log(msg, "\n", msg.json());
+        alert("Soda Successfully saved!");
         window.location = "./sodas.html";
       })
       .catch((err) => {
