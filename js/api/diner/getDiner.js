@@ -66,15 +66,21 @@
 
   // Delete soda
   function deleteSoda() {
-    $.ajax({
-      type: "DELETE",
-      url: dinerApi,
+    fetch(sodaApi, {
+      method: "DELETE",
     })
-      .done((res) => {
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("deleting diner failed\n", res);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
         alert("Diner successfully deleted!");
         window.location = "./diners.html";
       })
-      .catch((err) => alert("Oops, something went wrong!"));
+      .catch((err) => console.log("errorCatch in DELETE diner\n", err));
   }
 
   // Add event listener to delete soda button
