@@ -1,12 +1,12 @@
 (function () {
   // Immediately invoke function
-  // Get Diner form
+  // Get dinerform.html
   const dinerForm = document.getElementById("diner-form");
-  // const $form = $("#diner-form");
-  // Diner container
-  const $dinersContainer = $("#diners-container");
+  // Diner container??not used
+  const dinersContainer = document.getElementById("diners-container");
   // Get sodas container for diners
-  const $sodasContainer = $("#sodas-container");
+  // const $sodasContainer = $("#sodas-container");
+  const sodasContainer = document.getElementById("sodas-container");
   // Declare api server for requesting all diners
   const apiServerDiners = "http://localhost:3000/diners";
   // Declare api server for creating new diner
@@ -32,19 +32,15 @@
 
   // Function render soda elements
   function renderOptionElements({ sodas }) {
-    if (sodas.length === 0)
-      return $sodasContainer.replaceWith(`
-           <h4> There are no sodas being served at the moment </h4>
-        `);
+    if (sodas.length === 0) {
+      return (sodasContainer.innerHTML = `<h4> There are no sodas being served at the moment </h4>`);
+    }
+    let container = "";
     // Loop thru the data
     for (let obj of sodas) {
-      // Append the options for select box
-      $sodasContainer.append(`
-
-                    <option value=${obj._id}> ${obj.name} </option>
-            
-                `);
+      container += `<option value=${obj._id}> ${obj.name} </option>`;
     }
+    sodasContainer.innerHTML = container;
   }
 
   // Request all diners from server

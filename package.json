@@ -12,7 +12,7 @@
     "dev": "node --watch --env-file=.env server.js",
     "clp": "node CLProc/trigger.js",
     "prettier": "prettier --write ./**",
-    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
+    "format": "prettier --write \"**/*.+(js|jsx|json|css|md|html)\"",
     "test": " mocha -R list",
     "model": "mocha */model.test.js",
     "controller": "mocha */controller.test.js",
