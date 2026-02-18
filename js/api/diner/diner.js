@@ -2,27 +2,31 @@
   // Immediately invoke function
   // Get dinerform.html
   const dinerForm = document.getElementById("diner-form");
+
   // Diner container??not used
   const dinersContainer = document.getElementById("diners-container");
-  // Get sodas container for diners
-  // const $sodasContainer = $("#sodas-container");
+
   const sodasContainer = document.getElementById("sodas-container");
-  // Declare api server for requesting all diners
+
+  //requesting all diners
   const apiServerDiners = "http://localhost:3000/diners";
-  // Declare api server for creating new diner
+  //creating new diner
   const apiServerDiner = "http://localhost:3000/diner";
-  // Declare api server for requesting sodas
+  //requesting sodas
   const apiServerSoda = "http://localhost:3000/sodas/serving";
+
   // Get the sodas for soda form
   function getSodas() {
     // Get sodas
-    $.ajax({
-      type: "GET",
-      url: apiServerSoda,
-    })
-      .done((res) => {
-        // Render option elements for soda
-        renderOptionElements(res);
+    fetch(apiServerSoda)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("getSodas\n", res);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        renderOptionElements(data);
       })
       .catch((err) => console.log(err, "Something went wrong fetching sodas"));
   }
