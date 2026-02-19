@@ -1,8 +1,6 @@
 (function () {
-  // Immediately invoke function
-  // Get browser cookies
   const cookies = document.cookie;
-  // Parse cookies and get diner's id
+
   const dinerID = cookies
     .split("; ")
     .find((cookie) => cookie.startsWith("diner"))
@@ -39,31 +37,38 @@
   });
 
   function saveDetails() {
-    const name = document.querySelector('input[name="name"]').value;
-    const location = document.querySelector('input[name="location"]').value;
+    const name = document.querySelector('input[name="name"]')?.value;
+    const location = document.querySelector('input[name="location"]')?.value;
     const sodas = document.getElementById("sodas")?.children;
     const sodaIDs = [];
-    // Push IDs of sodas still being served
+
     for (let soda of sodas) {
       sodaIDs.push(soda.id);
     }
-    // Create a new soda object
+
     const dinerObj = {
       name,
       location,
       sodas: sodaIDs,
     };
-    // Send a PUT request to update the document in mongo
-    $.ajax({
-      type: "PUT",
-      url: dinerApi,
-      data: dinerObj,
+
+    fetch(dinerApi, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dinerObj),
     })
-      .done((res) => {
-        // Once updated successfully, render an alert
-        alert("Updated diner!");
-        location.reload();
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("put in save\n", response);
+        }
       })
-      .catch((err) => alert("Oops, something went wrong!"));
+      .then(() => {
+        alert("Updated diner!");
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log("saving error", err);
+        alert("Oops, something went wrong!");
+      });
   }
 })();
