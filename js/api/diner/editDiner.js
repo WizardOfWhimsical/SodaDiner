@@ -39,19 +39,18 @@
   });
 
   function saveDetails() {
-    // Get input elements for editing/saving new values
-    const $name = $('input[name="name"]').val();
-    const $location = $('input[name="location"]').val();
-    const $sodas = $("#sodas").children();
+    const name = document.querySelector('input[name="name"]').value;
+    const location = document.querySelector('input[name="location"]').value;
+    const sodas = document.getElementById("sodas")?.children;
     const sodaIDs = [];
     // Push IDs of sodas still being served
-    for (let $soda of $sodas) {
-      sodaIDs.push($soda.id);
+    for (let soda of sodas) {
+      sodaIDs.push(soda.id);
     }
     // Create a new soda object
     const dinerObj = {
-      name: $name,
-      location: $location,
+      name,
+      location,
       sodas: sodaIDs,
     };
     // Send a PUT request to update the document in mongo
