@@ -36,7 +36,7 @@
     sodas.map((soda) => {
       contents += `<option value=${soda._id}> ${soda.name} </option>`;
     });
-    sodasContainer.innerHTML = contents;
+    if (sodasContainer) sodasContainer.innerHTML = contents;
   }
 
   function getDiners() {
