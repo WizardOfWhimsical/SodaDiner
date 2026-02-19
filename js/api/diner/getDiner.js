@@ -9,60 +9,80 @@
     .split("=")[1];
   // Url for diner's information
   const dinerApi = "http://localhost:3000/diner/" + dinerID;
+
   // Delete Soda button
-  const $deleteBtn = $("#deleteDiner");
+  // const $deleteBtn = $("#deleteDiner");
+
+  const deleteBtn = document.getElementById("deleteDiner");
   // Make diner ajax request
-  $.ajax({
-    type: "GET",
-    url: dinerApi,
-  })
-    .done((res) => {
-      console.log(res);
-      if (!res.diner) {
-        $("section").text("Please choose a diner");
+
+  fetch(dinerApi)
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return res.json();
+    })
+    .then((data) => {
+      console.log(data);
+      if (!data.diner) {
+        document.querySelector("section").textContent = "Please choose a diner";
       } else {
-        // Render soda in UI
-        renderDiner(res.diner);
+        renderDiner(data.diner);
       }
     })
-    .catch((err) => $("section").text("Please choose a diner"));
+    .catch((err) => {
+      document.querySelector("section").textContent = `${err.message}`;
+      console.log("diners get:\n", err);
+    });
+
   // Render the information for Diner
-  const renderDiner = ({ name, location, sodas }) => {
-    const $title = $("#title");
-    const $name = $("#name");
-    const $location = $("#location");
-    // Assign these elements with the values from the soda object
-    $title.text(name);
-    $name.text(name);
-    $location.text(location);
+  function renderDiner({ name, location, sodas }) {
+    const titleEl = document.getElementById("title");
+    const nameEl = document.getElementById("name");
+    const locationEl = document.getElementById("location");
+
+    titleEl.textContent = name;
+    nameEl.textContent = name;
+    locationEl.textContent = location;
+
     renderDinerSodas(sodas);
-  };
+  }
 
   function renderDinerSodas(sodas) {
-    const $sodaDiv = $("#sodas");
+    // const $sodaDiv = $("#sodas");
+    const sodaDiv = document.getElementById("sodas");
     // If no sodas are being served, notify the user
-    if (sodas.length === 0) return $sodaDiv.text("No sodas are being served");
+    if (sodas.length === 0) {
+      return (sodaDiv.textContent = "No sodas are being served");
+    }
     // Otherwise, render the sodas as an option
+    let content = "";
     sodas.map((soda) => {
-      $sodaDiv.append(`
-                <li id="${soda._id}">${soda.name}</li>
-            `);
+      content += `<li id="${soda._id}">${soda.name}</li>`;
     });
+    sodaDiv.innerHTML = content;
   }
 
   // Delete soda
   function deleteSoda() {
-    $.ajax({
-      type: "DELETE",
-      url: dinerApi,
+    fetch(sodaApi, {
+      method: "DELETE",
     })
-      .done((res) => {
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("deleting diner failed\n", res);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
         alert("Diner successfully deleted!");
         window.location = "./diners.html";
       })
-      .catch((err) => alert("Oops, something went wrong!"));
+      .catch((err) => console.log("errorCatch in DELETE diner\n", err));
   }
 
   // Add event listener to delete soda button
-  $deleteBtn.on("click", deleteSoda);
+  deleteBtn.addEventListener("click", deleteSoda);
 })();
