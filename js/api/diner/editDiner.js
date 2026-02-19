@@ -8,50 +8,34 @@
     .find((cookie) => cookie.startsWith("diner"))
     .split("=")[1];
 
-  // Api for editing diner according to its ID
   const dinerApi = "http://localhost:3000/diner/" + dinerID;
-  // Button for editing
-  const $editBtn = $("#editDiner");
-  // Assign a click event for edit button
-  $editBtn.on("click", function () {
-    // Convert 'this' button to 'Save'
-    $(this).text("Save");
-    // Declare all elements of sodas info
-    const $name = $("#name");
-    const $location = $("#location");
-    const $sodaCont = $("#sodas");
-    // const sodas
 
-    // Get the existing value of the elements
-    const nameVal = $name.text();
-    const locationVal = $location.text();
+  const editBtn = document.getElementById("editDiner");
 
-    // Assign those previous values to these input for editing
-    $name.html(`
-            <input name="name" class="edit-input" type='text' value='${nameVal}' />`);
-    $location.html(`
-            <input name="location" class="edit-input" type='text' value='${locationVal}' />`);
-    // Loop for each soda in container
-    $sodaCont.children().each(function (idx, $child) {
-      // Assign the 'this' to jQuery scope
-      $child = $(this);
-      // Append a delete button for each soda
-      $child.append(
-        `<button class="btn btn-danger deleteSodaBtn">Remove</button>`,
-      );
-      // Get the delete soda button for soda
-      const $btn = $(this).children("button");
-      // Add an event listener that removes the li element for soda
-      $btn.on("click", () => {
-        // Remove the li element
-        $(this).remove();
+  editBtn.addEventListener("click", function () {
+    const name = document.getElementById("name");
+    const location = document.getElementById("location");
+    const sodaCont = document.getElementById("sodas");
+
+    const nameVal = name.textContent;
+    const locationVal = location.textContent;
+
+    name.innerHTML = `<input name="name" class="edit-input" type='text' value='${nameVal}' />`;
+    location.innerHTML = `<input name="location" class="edit-input" type='text' value='${locationVal}' />`;
+
+    for (let child of sodaCont.children) {
+      const removeBtn = document.createElement("button");
+      removeBtn.className = "btn btn-danger deleteSodaBtn";
+      removeBtn.textContent = "Remove";
+      removeBtn.addEventListener("click", () => {
+        child.remove();
       });
-    }, $(this)); // Bind to jQuery's "this"
+      child.appendChild(removeBtn);
+    }
 
-    //Unbind this button from the previous click fuction
-    $(this).unbind();
-    // Assign this button to save details function for ajax request
-    $(this).on("click", saveDetails);
+    this.textContent = "Save";
+    this.removeEventListener("click", arguments.callee);
+    this.addEventListener("click", saveDetails);
   });
 
   function saveDetails() {
