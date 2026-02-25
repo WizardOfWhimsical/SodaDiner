@@ -25,14 +25,15 @@
       <h1>New Soda</h1>
       <hr />
       <form id="soda-form">
-        <label>Name</label>
-        <input class="form-control" type="text" name="name" />
-        <label>Brand</label>
-        <input class="form-control" type="text" name="brand" />
+        <label for="name">Name</label>
+        <input id="name" class="form-control" type="text" name="name" />
+        <label for="brand">Brand</label>
+        <input id="brand" class="form-control" type="text" name="brand" />
         <div class="sub-inputs">
           <div>
-            <label>Fizziness</label>
+            <label for="fizz">Fizziness</label>
             <input
+            id="fizz"
               class="form-control"
               type="number"
               min="1"
@@ -41,8 +42,9 @@
             />
           </div>
           <div>
-            <label>Rating</label>
+            <label for="rating">Rating</label>
             <input
+            id="rating"
               class="form-control"
               type="number"
               min="1"
@@ -51,7 +53,7 @@
             />
           </div>
         </div>
-        <button class="btn btn-secondary add-btn">Add Soda</button>
+        <button type="submit" class="btn btn-secondary add-btn">Add Soda</button>
       </form>
       <hr />
     </section>
