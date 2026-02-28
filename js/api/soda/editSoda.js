@@ -19,14 +19,10 @@
     const rating = document.getElementById("rating");
     const infoContainer = document.querySelector(".info");
 
-    // Get the existing value of the elements
     const nameVal = name.textContent;
     const brandVal = brand.textContent;
     const fizzinessVal = fizziness.textContent;
     const ratingVal = rating.textContent;
-
-    // infoContainer.replaceChildren();
-    // infoContainer.querySelectorAll("p").forEach((tag) => tag.remove());
 
     const nameHTML = renderTextInput("name", nameVal);
     const brandHTML = renderTextInput("brand", brandVal);
@@ -79,7 +75,7 @@
     const id = `${item}-input`;
     return `
     <div>
-      <label for="${id}">${item}: </label>
+      <label for="${id}">${item.toUpperCase()}: </label>
       <input id="${id}" name="${item}" class="edit-input" type="text" value="${value}" />
     </div>
     `;
