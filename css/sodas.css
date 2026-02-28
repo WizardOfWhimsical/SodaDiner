@@ -80,6 +80,9 @@ section {
   text-align: left;
 }
 
+/* .info > label {
+  text-align: left;
+} */
 .info > p {
   text-align: left;
 }

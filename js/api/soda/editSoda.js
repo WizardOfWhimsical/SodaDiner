@@ -12,29 +12,32 @@
 
   const editBtn = document.getElementById("editSoda");
 
-  const name = document.getElementById("name");
-  const brand = document.getElementById("brand");
-  const fizziness = document.getElementById("fizziness");
-  const rating = document.getElementById("rating");
+  editBtn.addEventListener("click", function handler() {
+    const name = document.getElementById("name");
+    const brand = document.getElementById("brand");
+    const fizziness = document.getElementById("fizziness");
+    const rating = document.getElementById("rating");
+    const infoContainer = document.querySelector(".info");
 
-  editBtn.addEventListener("click", function () {
     // Get the existing value of the elements
     const nameVal = name.textContent;
     const brandVal = brand.textContent;
     const fizzinessVal = fizziness.textContent;
     const ratingVal = rating.textContent;
 
-    name.innerHTML = `
-            <input name="name" class="edit-input" type='text' value='${nameVal}' />`;
-    brand.innerHTML = `
-            <input name="brand" class="edit-input" type='text' value='${brandVal}' />`;
-    fizziness.innerHTML = `
-            <input name="fizziness" class="edit-input" type='number' value='${fizzinessVal}' />`;
-    rating.innerHTML = `
-            <input name="rating" class="edit-input" type='number' value='${ratingVal}' />`;
+    // infoContainer.replaceChildren();
+    // infoContainer.querySelectorAll("p").forEach((tag) => tag.remove());
+
+    const nameHTML = renderTextInput("name", nameVal);
+    const brandHTML = renderTextInput("brand", brandVal);
+    const fizzinessHTML = renderTextInput("fizziness", fizzinessVal);
+    const ratingrHTML = renderTextInput("rating", ratingVal);
+
+    infoContainer.innerHTML =
+      nameHTML + brandHTML + fizzinessHTML + ratingrHTML;
 
     this.textContent = "Save";
-    this.removeEventListener("click", arguments.callee);
+    this.removeEventListener("click", handler);
     this.addEventListener("click", saveDetails);
   });
 
@@ -70,5 +73,15 @@
         console.log(err);
         alert("Oops, something went wrong!");
       });
+  }
+
+  function renderTextInput(item, value) {
+    const id = `${item}-input`;
+    return `
+    <div>
+      <label for="${id}">${item}: </label>
+      <input id="${id}" name="${item}" class="edit-input" type="text" value="${value}" />
+    </div>
+    `;
   }
 })();
