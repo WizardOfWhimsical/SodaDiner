@@ -15,15 +15,3 @@ export default async function fetchBase<T>(
     return { data: null, error };
   }
 }
-
-interface Todo {
-  id: string;
-  title: string;
-}
-
-const user = await fetchBase<{ id: string }>("user");
-
-const todoList = await fetchBase<Todo[]>("todo");
-todoList.data?.map((todo) => {
-  console.log(todo.title);
-});
