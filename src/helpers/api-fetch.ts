@@ -6,7 +6,7 @@ export default async function fetchBase<T>(
     const response = await fetch(pathName, options);
     if (!response.ok) {
       const err = await response.json();
-      throw new Error("Base-Fetch Error\n", err);
+      throw new Error(`Base-Fetch Error ${response.status}\n`, { cause: err });
     }
     const data: T = await response.json();
     return { data, error: null };
