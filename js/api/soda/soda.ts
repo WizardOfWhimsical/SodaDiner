@@ -16,26 +16,16 @@ type Soda = {
 };
 
 async function getSodas() {
-  const { data, error } = await fetchBase(apiServerSoda);
+  const { data, error } = await fetchBase<Soda[]>(apiServerSoda);
   if (error) console.log("error from getSoda\n", error);
 
   console.log("fetch success\n", data);
-  // renderSodas(data)
+  // renderSodas(data);
 }
 
 getSodas();
 
-function renderSodas({
-  sodas,
-}: {
-  sodas: {
-    name: string;
-    _id: string;
-    fizziness: number;
-    rating: number;
-    served: boolean;
-  }[];
-}): void {
+function renderSodas(sodas: Soda[]): void {
   const sodaDiv = document.getElementById("sodas") as HTMLElement;
 
   if (sodas.length === 0) {
