@@ -17,7 +17,10 @@ type Soda = {
 
 async function getSodas() {
   const { data, error } = await fetchBase<Soda[]>(apiServerSoda);
-  if (error) console.log("error from getSoda\n", error);
+  if (error) {
+    console.log("error from getSoda\n", error);
+    return;
+  }
 
   console.log("fetch success\n", data);
   // renderSodas(data);
