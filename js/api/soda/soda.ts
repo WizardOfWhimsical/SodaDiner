@@ -50,7 +50,7 @@ function renderSodas(sodas: Soda[]): void {
 
   sodaDiv.addEventListener("click", (e) => {
     const target = (e.target as HTMLElement).closest("div[id]");
-    console.log(target.id);
-    document.cookie = `soda=${target.id}`;
+    console.log(target?.id);
+    document.cookie = `soda=${target?.id}`;
   });
 }
