@@ -2,6 +2,18 @@ import fetchBase from "../../../src/helpers/api-fetch";
 
 const form = document.getElementById("soda-form") as HTMLElement;
 const apiServerSoda: string = "http://localhost:3000/sodas";
+/**
+ * i know the shap of data coming into here and want to declaire it but it is more difficult that i thought to put it together
+ *
+ */
+
+type Soda = {
+  name: string;
+  _id: string;
+  fizziness: number;
+  rating: number;
+  served: boolean;
+};
 
 async function getSodas() {
   const { data, error } = await fetchBase(apiServerSoda);
