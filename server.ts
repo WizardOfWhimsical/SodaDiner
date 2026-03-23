@@ -1,5 +1,5 @@
 import config from "#config";
-import express, { ErrorRequestHandler } from "express";
+import express, { type ErrorRequestHandler } from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
 import sodaRouter from "#Routes/Soda";
