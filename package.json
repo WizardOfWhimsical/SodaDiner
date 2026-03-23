@@ -8,8 +8,10 @@
   "description": "Let's Go!!",
   "type": "module",
   "scripts": {
-    "start": "node --env-file=.env server.ts",
-    "dev": "node --watch --env-file=.env server.ts",
+    "start": "npm run dev",
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "dev:client": "vite",
+    "dev:server": "node --watch --env-file=.env server.ts",
     "clp": "node CLProc/trigger.js",
     "prettier": "prettier --write ./**",
     "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
@@ -26,14 +28,19 @@
     "restoreTest": "mongorestore --uri mongodb://localhost:27017/SodaDinerTest --drop dumpedDB/tests"
   },
   "dependencies": {
+    "concurrently": "9.2.1",
+    "cors": "2.8.6",
     "express": "^4.19.2",
     "inquirer": "^9.2.19",
     "mongoose": "^8.2.4",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vite": "8.0.2"
   },
   "devDependencies": {
+    "@types/cors": "2.8.19",
     "@types/express": "^5.0.6",
     "@types/morgan": "^1.9.10",
+    "@types/node": "24.12.0",
     "mocha": "^10.4.0",
     "morgan": "^1.10.0",
     "prettier": "^3.2.5"

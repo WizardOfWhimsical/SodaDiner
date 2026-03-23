@@ -1,4 +1,5 @@
 import config from "#config";
+import cors from "cors";
 import express, { type ErrorRequestHandler } from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
@@ -7,6 +8,18 @@ import dinerRouter from "#Routes/Diner";
 import { connect } from "#Connect";
 
 const app = express();
+
+const allowedOrigins = (process.env.CORS_ORIGIN ?? "http://localhost:5173")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  }),
+);
 
 let initalized = false;
 app.use((_, res, next) => {
