@@ -9,11 +9,12 @@ import { connect } from "#Connect";
 
 const app = express();
 
+// CORS configuration
 const allowedOrigins = (process.env.CORS_ORIGIN ?? "http://localhost:5173")
   .split(",")
   .map((origin) => origin.trim())
   .filter(Boolean);
-
+// CORS middleware
 app.use(
   cors({
     origin: allowedOrigins,
