@@ -16,7 +16,7 @@ interface Soda {
 }
 
 async function getSodas() {
-  const { data, error } = await fetchBase<Soda[]>(apiServerSoda);
+  const { data, error } = await fetchBase<Array<Soda>>(apiServerSoda);
   if (error) {
     console.log("error from getSoda\n", error);
     return;
@@ -51,6 +51,7 @@ function renderSodas(sodas: Array<Soda>): void {
   sodaDiv.innerHTML = content;
 
   sodaDiv.addEventListener("click", (e) => {
+    // This is a common pattern to find the closest parent element when setting a click event based on a specific attribute (in this case, an id)
     const target = e.target as HTMLElement;
     const targetEl = target?.closest("div[id]");
     console.log(targetEl?.id);
