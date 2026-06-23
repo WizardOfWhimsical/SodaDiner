@@ -1,56 +1,18 @@
 {
-  "name": "SodaDiner",
-  "version": "4.2.0",
-  "main": "server.ts",
-  "keywords": [],
-  "author": "Stephen Lewis",
-  "license": "ISC",
-  "description": "Let's Go!!",
-  "type": "module",
-  "scripts": {
-    "start": "npm run dev",
-    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
-    "dev:client": "vite",
-    "dev:server": "node --watch --env-file=.env server.ts",
-    "clp": "node CLProc/trigger.js",
-    "prettier": "prettier --write ./**",
-    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
-    "test": " mocha -R list",
-    "model": "mocha */model.test.js",
-    "controller": "mocha */controller.test.js",
-    "route": "mocha */route.test.js",
-    "crud": "mongorestore --uri mongodb://localhost:27017/SodaDinerTest --drop dumpedDB/tests && ENV=test mocha */cruds",
-    "allTest": "mongorestore --uri mongodb://localhost:27017/SodaDinerTest --drop dumpedDB/tests && ENV=test mocha _test_ */cruds",
-    "inspect": "nodemon --inspect server.js",
-    "dumpDev": "mongodump --uri mongodb://localhost:27017/SodaDiner --out dumpedDB/developer",
-    "restoreDev": "mongorestore --uri mongodb://localhost:27017/SodaDiner --drop dumpedDB/developer/SodaDiner",
-    "dumpTest": "mongodump --uri mongodb://localhost:27017/SodaDinerTest --out dumpedDB/tests",
-    "restoreTest": "mongorestore --uri mongodb://localhost:27017/SodaDinerTest --drop dumpedDB/tests"
-  },
-  "dependencies": {
-    "concurrently": "9.2.1",
-    "cors": "2.8.6",
-    "express": "^4.19.2",
-    "inquirer": "^9.2.19",
-    "mongoose": "^8.2.4",
-    "typescript": "^5.9.3",
-    "vite": "8.0.2"
-  },
-  "devDependencies": {
-    "@types/cors": "2.8.19",
-    "@types/express": "^5.0.6",
-    "@types/morgan": "^1.9.10",
-    "@types/node": "24.12.0",
-    "mocha": "^10.4.0",
-    "morgan": "^1.10.0",
-    "prettier": "^3.2.5"
-  },
-  "imports": {
-    "#config": "./config.js",
-    "#Models/*": "./models/*.model.js",
-    "#Controllers/*": "./controllers/*.control.js",
-    "#Routes/*": "./routes/*.route.js",
-    "#Resp": "./_test_/cruds/dummyRes.js",
-    "#Connect": "./monCon.js"
-  }
+	"name": "SodaDiner",
+	"private": true,
+	"workspaces": ["client", "server"],
+	"scripts": {
+		"prepare": "husky",
+		"dev": "concurrently \"npm run dev -w client\" \"npm run dev -w server\"",
+		"dev:client": "npm run dev -w client",
+		"dev:server": "npm run dev -w server",
+		"test": "npm test -w server"
+	},
+	"devDependencies": {
+		"concurrently": "9.2.1",
+		"husky": "9.1.7",
+		"nano-staged": "1.0.2",
+		"prettier": "3.8.1"
+	}
 }

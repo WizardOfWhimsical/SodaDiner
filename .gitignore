@@ -1,11 +1,8 @@
-# dotenv environment variable files
+node_modules
+dist
+.DS_Store
+*.log
+.claude/
+
 .env
-.env.*
-!.env.example
-
-# node modules
-node_modules/
-
-# build output
-dist/
-
+server/.env
