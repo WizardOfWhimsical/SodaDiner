@@ -1,6 +1,7 @@
 {
   "name": "SodaDiner",
   "private": true,
+  "type": "module",
   "workspaces": [
     "client",
     "server"
