@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-// import Soda from "#Models/Soda"
+// import Soda from "#models/Soda"
 
 const Schema = mongoose.Schema;
 

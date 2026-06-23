@@ -1,4 +1,4 @@
-import { connect, disconnect } from "#Connect";
+import { connect, disconnect } from "#connect";
 
 before((done) => {
   console.log("connected to Mongo");

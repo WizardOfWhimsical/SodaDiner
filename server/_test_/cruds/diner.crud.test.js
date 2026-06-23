@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import assert from "assert";
-import Resp from "#Resp";
-// import DinerMod from "#Models/Diner";
-import DinerCon from "#Controllers/Diner";
+import Resp from "#resp";
+// import DinerMod from "#models/Diner";
+import DinerCon from "#controllers/Diner";
 
 describe("Diner crud operations...", () => {
   const User = mongoose.Types.ObjectId;

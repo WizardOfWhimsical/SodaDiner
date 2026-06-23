@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import assert from "assert";
-import Resp from "#Resp";
-import SodaCon from "#Controllers/Soda";
+import Resp from "#resp";
+import SodaCon from "#controllers/Soda";
 
 describe("Soda crud operations with...", () => {
   const User = mongoose.Types.ObjectId;

@@ -1,5 +1,5 @@
-import sodaRoute from "#Routes/Soda";
-import dinerRoute from "#Routes/Diner";
+import sodaRoute from "#routes/Soda";
+import dinerRoute from "#routes/Diner";
 import assert from "assert";
 
 describe("Routes....", () => {

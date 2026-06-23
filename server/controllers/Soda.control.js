@@ -1,4 +1,4 @@
-import Soda from "#Models/Soda";
+import Soda from "#models/Soda";
 
 function getMany(req, res) {
   return Soda.find()

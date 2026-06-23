@@ -1,8 +1,8 @@
 /*
 will be writing cruds directly to here
 */
-import Soda from "#Models/Soda";
-import Diner from "#Models/Diner";
+import Soda from "#models/Soda";
+import Diner from "#models/Diner";
 import mongoose from "mongoose";
 
 function getMany(req, res) {

@@ -1,5 +1,5 @@
-import Sodas from "#Controllers/Soda";
-import Diner from "#Controllers/Diner";
+import Sodas from "#controllers/Soda";
+import Diner from "#controllers/Diner";
 import { isFunction } from "util";
 import assert from "assert";
 

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import Soda from "#Controllers/Soda";
+import Soda from "#controllers/Soda";
 
 const router = Router();
 

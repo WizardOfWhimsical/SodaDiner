@@ -3,9 +3,9 @@ import cors from "cors";
 import express, { type ErrorRequestHandler } from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
-import sodaRouter from "#Routes/Soda";
-import dinerRouter from "#Routes/Diner";
-import { connect } from "#Connect";
+import sodaRouter from "#routes/Soda";
+import dinerRouter from "#routes/Diner";
+import { connect } from "#connect";
 
 const app = express();
 

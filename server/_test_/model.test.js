@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import assert from "assert";
-import sodaModel from "#Models/Soda";
-import dinerModel from "#Models/Diner";
+import sodaModel from "#models/Soda";
+import dinerModel from "#models/Diner";
 
 describe("testing the models", () => {
   describe("Soda Model test", () => {

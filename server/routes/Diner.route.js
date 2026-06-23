@@ -1,5 +1,5 @@
 import { Router } from "express";
-import Diner from "#Controllers/Diner";
+import Diner from "#controllers/Diner";
 
 const router = Router();
 
