@@ -1,0 +1,51 @@
+import config from "#config";
+import cors from "cors";
+import express, { type ErrorRequestHandler } from "express";
+import mongoose from "mongoose";
+import morgan from "morgan";
+import sodaRouter from "#routes/Soda";
+import dinerRouter from "#routes/Diner";
+import { connect } from "#connect";
+
+const app = express();
+
+const allowedOrigins = (process.env.CORS_ORIGIN ?? "http://localhost:3000")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  }),
+);
+
+let initalized = false;
+app.use((_, res, next) => {
+  if (!initalized) {
+    res.clearCookie("diner");
+    res.clearCookie("soda");
+    initalized = true;
+  }
+  next();
+});
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan("dev"));
+app.use(express.static("../client"));
+
+app.use("/api/soda(s)?", sodaRouter);
+app.use("/api/diner(s)?", dinerRouter);
+
+connect().then(() => {
+  app.listen(config.port, () => {
+    console.log(`@ port ${config.port}`);
+  });
+});
+
+const handler: ErrorRequestHandler = (err, req, res, next) => {
+  console.log(`${err}`);
+};
+app.use(handler);
