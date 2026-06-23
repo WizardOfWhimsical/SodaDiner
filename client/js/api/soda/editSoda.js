@@ -8,7 +8,7 @@
     .find((cookie) => cookie.startsWith("soda"))
     .split("=")[1];
 
-  const sodaApi = "http://localhost:3000/soda/" + sodaID;
+  const sodaApi = "/api/soda/" + sodaID;
 
   const editBtn = document.getElementById("editSoda");
 

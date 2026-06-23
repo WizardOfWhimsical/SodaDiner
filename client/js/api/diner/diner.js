@@ -4,9 +4,9 @@
   // const dinersContainer = document.getElementById("diners-container");
   const sodasContainer = document.getElementById("sodas-container");
 
-  const apiServerDiners = "http://localhost:3000/diners";
-  const apiServerDiner = "http://localhost:3000/diner";
-  const apiServerSoda = "http://localhost:3000/sodas/serving";
+  const apiServerDiners = "/api/diners";
+  const apiServerDiner = "/api/diner";
+  const apiServerSoda = "/api/sodas/serving";
 
   // if invoked immediatly why not just run the code?
   function getSodas() {

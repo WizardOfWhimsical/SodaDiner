@@ -1,6 +1,6 @@
 (function () {
   const form = document.getElementById("soda-form");
-  const apiServerSoda = "http://localhost:3000/sodas";
+  const apiServerSoda = "/api/sodas";
   function getSodas() {
     fetch(apiServerSoda)
       .then((res) => {

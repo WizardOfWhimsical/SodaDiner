@@ -6,7 +6,7 @@
     .find((cookie) => cookie.startsWith("diner"))
     .split("=")[1];
 
-  const dinerApi = "http://localhost:3000/diner/" + dinerID;
+  const dinerApi = "/api/diner/" + dinerID;
 
   const editBtn = document.getElementById("editDiner");
 
