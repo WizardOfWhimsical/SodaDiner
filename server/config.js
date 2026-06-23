@@ -1,7 +1,7 @@
 import process from "process";
 
 const config = {
-  port: process.env.PORT || 3000,
+  port: process.env.PORT || 3001,
   dbHost: "localhost",
   dbPort: 27017,
 };

@@ -9,7 +9,7 @@ import { connect } from "#connect";
 
 const app = express();
 
-const allowedOrigins = (process.env.CORS_ORIGIN ?? "http://localhost:5173")
+const allowedOrigins = (process.env.CORS_ORIGIN ?? "http://localhost:3000")
   .split(",")
   .map((origin) => origin.trim())
   .filter(Boolean);
@@ -34,10 +34,10 @@ app.use((_, res, next) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
-app.use(express.static("../SodaDiner"));
+app.use(express.static("../client"));
 
-app.use("/soda(s)?", sodaRouter);
-app.use("/diner(s)?", dinerRouter);
+app.use("/api/soda(s)?", sodaRouter);
+app.use("/api/diner(s)?", dinerRouter);
 
 connect().then(() => {
   app.listen(config.port, () => {
