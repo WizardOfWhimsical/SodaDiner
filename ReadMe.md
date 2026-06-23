@@ -62,24 +62,27 @@ Upon opening the zip file containing the Application,
 # SodaDiner Test/Dev Operations
 
 ## Automated Service
+
 <hr>
 
 I have made a tool to help automate alot of this functionality, I hope you like it!
-1) While the terminal is still open,  enter...
 
-    (_clp = command line process_)
+1. While the terminal is still open, enter...
+
+   (_clp = command line process_)
 
 ```
 npm run clp
 ```
 
-2) You will the be asked to answer a question based off what you want to do
-3) Follow the instructions to get the operations you want to activate
-4) If you need to do anything after starting the server you will have to press "Control-C" to stop the server and run any other tests or back up the database
+2. You will the be asked to answer a question based off what you want to do
+3. Follow the instructions to get the operations you want to activate
+4. If you need to do anything after starting the server you will have to press "Control-C" to stop the server and run any other tests or back up the database
 
-*NOTE: Or you may open another terminal and go to the SodaDiner Directory and run options from their while server is running.*
+_NOTE: Or you may open another terminal and go to the SodaDiner Directory and run options from their while server is running._
 
 ## Manual Test Script Operations
+
 <hr>
 
 1. Open Terminal @ Directory SodaDiner and enter...
@@ -98,6 +101,7 @@ npm run clp
    2.2) You will type the option you want to run where the "< commandHere >" is.
 
 ## Test Commands
+
 <hr>
 
 1. model -> tests model schema for db
@@ -107,6 +111,7 @@ npm run clp
 5. allTest -> runs all the tests
 
 ## Devolper Command
+
 <hr>
 
 1. dumpDev -> makes a back up of db as part of backup strategy
@@ -119,6 +124,5 @@ npm run clp
 <br>
 <br>
 <br>
-
 
 <em>I had to make my own logo cause I couldn't get the original</em>
