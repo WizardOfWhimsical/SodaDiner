@@ -4,8 +4,8 @@
   "type": "module",
   "main": "server.ts",
   "scripts": {
-    "dev": "node --watch --env-file=.env server.ts",
-    "start": "node --env-file=.env server.ts",
+    "dev": "node --watch --env-file=../.env server.ts",
+    "start": "node --env-file=../.env server.ts",
     "test": "mocha -R list",
     "model": "mocha _test_/model.test.js",
     "controller": "mocha _test_/controller.test.js",
