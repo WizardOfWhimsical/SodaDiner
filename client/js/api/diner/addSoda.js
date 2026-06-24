@@ -36,32 +36,18 @@
       alert("Oops, something went wrong!");
     });
 
-  // $.ajax({
-  //   type: "GET",
-  //   url: dinerApi,
-  // })
-  //   .done((res) => {
-  //     if (!res.diner) {
-  //       $("section").text("Please choose a diner");
-  //     } else {
-  //       // Render soda in UI
-  //       renderDiner(res.diner);
-  //       // Set diner's sodas in global objet
-  //       window.sodas = res.diner.sodas;
-  //     }
-  //   })
-  //   .catch((err) => $("section").text("Please choose a diner"));
   // Render the information for Diner
   const renderDiner = ({ name, location, sodas }) => {
-    const $title = $("#title");
-    const $name = $("#name");
-    const $location = $("#location");
+    const titleEl = document.getElementById("title");
+    const nameEl = document.getElementById("name");
+    const locationEl = document.getElementById("location");
     renderDinerSodas(sodas);
     // Assign these elements with the values from the soda object
-    $title.text(name);
-    $name.text(name);
-    $location.text(location);
+    titleEl.innerText = `${name}`;
+    nameEl.innerText = `${name}`;
+    locationEl.innerText = `${location}`;
   };
+
   // Render the sodas that are being served in this diner
   const renderDinerSodas = (sodas) => {
     const $sodas = $("#sodas");
