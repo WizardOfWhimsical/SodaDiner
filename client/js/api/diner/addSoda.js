@@ -15,21 +15,42 @@
   // Api for updating sodas for diner
   const apiUpdateSodas = "/api/diner/" + dinerID + "/sodas";
   // Make diner ajax request
-  $.ajax({
-    type: "GET",
-    url: dinerApi,
+  fetch(dinerApi, {
+    method: "GET",
   })
-    .done((res) => {
-      if (!res.diner) {
-        $("section").text("Please choose a diner");
-      } else {
-        // Render soda in UI
-        renderDiner(res.diner);
-        // Set diner's sodas in global objet
-        window.sodas = res.diner.sodas;
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("failed retrieving diners\n", response);
       }
+      if (!response.diner) {
+        const section = document.querySelector("section");
+        section.innerText = "Please choose a diner";
+      }
+      const resp = response.json();
+      console.log("diner resp in add soda\n", response);
+      renderDiner(response.diner);
+      window.sodas = response.diner.sodas;
     })
-    .catch((err) => $("section").text("Please choose a diner"));
+    .catch((err) => {
+      console.log("error\n", err);
+      alert("Oops, something went wrong!");
+    });
+
+  // $.ajax({
+  //   type: "GET",
+  //   url: dinerApi,
+  // })
+  //   .done((res) => {
+  //     if (!res.diner) {
+  //       $("section").text("Please choose a diner");
+  //     } else {
+  //       // Render soda in UI
+  //       renderDiner(res.diner);
+  //       // Set diner's sodas in global objet
+  //       window.sodas = res.diner.sodas;
+  //     }
+  //   })
+  //   .catch((err) => $("section").text("Please choose a diner"));
   // Render the information for Diner
   const renderDiner = ({ name, location, sodas }) => {
     const $title = $("#title");
