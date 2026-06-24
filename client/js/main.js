@@ -1,1 +1,1 @@
-import "./api/diner/diner";
+import "./api/diner/diner.js";
