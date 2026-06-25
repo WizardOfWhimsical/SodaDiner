@@ -68,6 +68,11 @@ async function saveDetails() {
 
   if (error) {
     console.log("error from getSoda\n", error);
+    alert(`Opps, something went wrong\ncheck the logs`);
     return;
+  }
+  if (data) {
+    alert(`Update Successful\n${data}`);
+    location.reload();
   }
 }
