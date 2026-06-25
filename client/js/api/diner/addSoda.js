@@ -26,10 +26,12 @@
         const section = document.querySelector("section");
         section.innerText = "Please choose a diner";
       }
-      const resp = response.json();
-      console.log("diner resp in add soda\n", response);
-      renderDiner(response.diner);
-      window.sodas = response.diner.sodas;
+      return response.json();
+    })
+    .then((data) => {
+      console.log("diner resp in add soda\n", data);
+      renderDiner(data.diner);
+      window.sodas = data.diner.sodas;
     })
     .catch((err) => {
       console.log("error\n", err);
@@ -62,14 +64,12 @@
         return resp.json();
       })
       .then((data) => {
+        console.log(data);
         const servingSodas = data.sodas;
-        // Get existing sodas in diner
         const dinerSodas = window.sodas.map((soda) => soda._id);
-        // Filter out the sodas that already exist in diner from sodas to be served
         let sodasToBeServed = servingSodas.filter((soda) =>
           dinerSodas.indexOf(soda._id) === -1 ? soda : "",
         );
-        // Return the sodas to be served to render in the UI
         renderUISodas(sodasToBeServed);
       });
   };
@@ -98,44 +98,43 @@
     });
   }
 
-  // function renderUISodas(sodas) {
-  //   $sodaContainer = $("#sodaContainer");
-  //   const $sodaSelect = $("#sodas");
-  //   if (sodas.length === 0) {
-  //     $("#addSodas").hide();
-  //     $sodaContainer.html("<h4>No new sodas are available to serve</h4>");
-  //   }
-  //   sodas.map((soda) => {
-  //     $sodaSelect.append(`
+  const addSodasButton = document.getElementById("addSodas");
 
-  //               <option value=${soda._id}> ${soda.name} </option>
-
-  //               `);
-  //   });
-  // }
-
-  // Get addSoda button
-  const $addSodas = $("#addSodas");
-  function addSodas() {
-    // Get the values of the sodas
-    const sodas = $("select[name='sodas']").val();
-    if (sodas.length === 0) return alert("Please choose soda(s)");
-    // Create object for soda
-    const data = { sodas: sodas };
-    // Update diner for new sodas being added
-    $.ajax({
-      type: "PUT",
-      url: apiUpdateSodas,
-      data: data,
-    })
-      .done((res) => {
-        // Successful response
-        alert("Saved sodas to diner");
-        // Return to diner's details page
-        window.location = "./diner.html";
-      })
-      .catch((err) => alert("Oops, something went wrong updating diner!"));
+  function getSelectedSodaIds() {
+    const sodaSelect = document.querySelector("select[name='sodas']");
+    return Array.from(sodaSelect.selectedOptions, (option) => option.value);
   }
 
-  $addSodas.on("click", addSodas);
+  function addSodas() {
+    const sodas = getSelectedSodaIds();
+
+    if (sodas.length === 0) {
+      alert("Please choose soda(s)");
+      return;
+    }
+
+    const body = new URLSearchParams();
+    sodas.forEach((id) => body.append("sodas", id));
+
+    fetch(apiUpdateSodas, {
+      method: "PUT",
+      body,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed updating diner");
+        }
+        return response.json();
+      })
+      .then(() => {
+        alert("Saved sodas to diner");
+        window.location = "./diner.html";
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("Oops, something went wrong updating diner!");
+      });
+  }
+
+  addSodasButton.addEventListener("click", addSodas);
 })();
