@@ -33,3 +33,10 @@ editBtn?.addEventListener("click", function handler(): void {
   this.removeEventListener("click", handler);
   this.addEventListener("click", saveDetails);
 });
+
+function saveDetails() {
+  const name = document.querySelector("input[name='name']");
+  const brand = document.querySelector("input[name='brand']");
+  const fizziness = document.querySelector("input[name='fizziness']");
+  const rating = document.querySelector("input[name='rating']");
+}
