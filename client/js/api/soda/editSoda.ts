@@ -35,8 +35,12 @@ editBtn?.addEventListener("click", function handler(): void {
 });
 
 function saveDetails() {
-  const name = document.querySelector("input[name='name']");
-  const brand = document.querySelector("input[name='brand']");
-  const fizziness = document.querySelector("input[name='fizziness']");
-  const rating = document.querySelector("input[name='rating']");
+  function getInputEl(str: string) {
+    return document.querySelector(`input[name=${str}]`) as HTMLInputElement;
+  }
+
+  const name = getInputEl("name");
+  const brand = getInputEl("brand");
+  const fizziness = getInputEl("fizziness");
+  const rating = getInputEl("rating");
 }
