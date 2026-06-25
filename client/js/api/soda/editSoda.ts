@@ -9,3 +9,11 @@ const sodaId = cookies
 const sodaApi = "/api/soda" + sodaId;
 
 const editBtn = document.getElementById("editSoda");
+
+editBtn?.addEventListener("click", function handler(): void {
+  const name = document.getElementById("name");
+  const brand = document.getElementById("brand");
+  const fizziness = document.getElementById("fizziness");
+  const rating = document.getElementById("rating");
+  const infoContainer = document.getElementById("info");
+});
