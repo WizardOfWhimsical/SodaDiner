@@ -41,7 +41,7 @@ editBtn?.addEventListener("click", function handler(): void {
   this.addEventListener("click", saveDetails);
 });
 
-function saveDetails() {
+async function saveDetails() {
   function getInputEl(str: string) {
     return document.querySelector(`input[name=${str}]`) as HTMLInputElement;
   }
@@ -57,4 +57,17 @@ function saveDetails() {
     fizziness: parseInt(fizziness?.value),
     taste_rating: parseInt(rating?.value),
   };
+
+  const { data, error } = await fetchBase<Soda>(sodaApi, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(builtSodaObject),
+  });
+
+  if (error) {
+    console.log("error from getSoda\n", error);
+    return;
+  }
 }
