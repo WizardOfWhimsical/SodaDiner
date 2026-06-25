@@ -16,4 +16,9 @@ editBtn?.addEventListener("click", function handler(): void {
   const fizziness = document.getElementById("fizziness");
   const rating = document.getElementById("rating");
   const infoContainer = document.getElementById("info");
+
+  const nameVal = name?.textContent;
+  const brandVal = brand?.textContent;
+  const fizzinessVal = fizziness?.textContent;
+  const ratingVal = rating?.textContent;
 });
