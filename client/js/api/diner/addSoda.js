@@ -89,13 +89,15 @@
 
     addSodasButton.style.display = "";
     sodaContainer.innerHTML = "";
+    const fragment = document.createDocumentFragment();
 
     sodas.forEach(({ _id, name }) => {
       const option = document.createElement("option");
       option.value = _id;
       option.textContent = name;
-      sodaSelect.appendChild(option);
+      fragment.append(option);
     });
+    sodaSelect.appendChild(fragment);
   }
 
   const addSodasButton = document.getElementById("addSodas");
