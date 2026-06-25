@@ -50,4 +50,11 @@ function saveDetails() {
   const brand = getInputEl("brand");
   const fizziness = getInputEl("fizziness");
   const rating = getInputEl("rating");
+
+  const builtSodaObject: Soda = {
+    name: name?.value,
+    brand: brand?.value,
+    fizziness: parseInt(fizziness?.value),
+    taste_rating: parseInt(rating?.value),
+  };
 }
