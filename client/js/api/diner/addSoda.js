@@ -50,17 +50,19 @@
 
   // Render the sodas that are being served in this diner
   const renderDinerSodas = (sodas) => {
-    const $sodas = $("#sodas");
-    $.ajax({
-      type: "GET",
-      headers: {
-        sodas: sodas,
-      },
-      url: apiServerSoda,
+    const $sodas = document.getElementById("sodas");
+    fetch(apiServerSoda, {
+      method: "GET",
+      headers: { sodas: sodas },
     })
-      .done((res) => {
-        // Get all sodas available to be served
-        const servingSodas = res.sodas;
+      .then((resp) => {
+        if (!resp.ok) {
+          throw new Error("failed retrieving sodas\n", resp);
+        }
+        return resp.json();
+      })
+      .then((data) => {
+        const servingSodas = data.sodas;
         // Get existing sodas in diner
         const dinerSodas = window.sodas.map((soda) => soda._id);
         // Filter out the sodas that already exist in diner from sodas to be served
@@ -69,8 +71,7 @@
         );
         // Return the sodas to be served to render in the UI
         renderUISodas(sodasToBeServed);
-      })
-      .catch((err) => console.log(err));
+      });
   };
 
   function renderUISodas(sodas) {
