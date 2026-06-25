@@ -75,20 +75,44 @@
   };
 
   function renderUISodas(sodas) {
-    $sodaContainer = $("#sodaContainer");
-    const $sodaSelect = $("#sodas");
-    if (sodas.length === 0) {
-      $("#addSodas").hide();
-      $sodaContainer.html("<h4>No new sodas are available to serve</h4>");
-    }
-    sodas.map((soda) => {
-      $sodaSelect.append(`
+    const sodaContainer = document.getElementById("sodaContainer");
+    const sodaSelect = document.getElementById("sodas");
+    const addSodasButton = document.getElementById("addSodas");
 
-                <option value=${soda._id}> ${soda.name} </option>
-            
-                `);
+    sodaSelect.innerHTML = "";
+
+    if (!Array.isArray(sodas) || sodas.length === 0) {
+      addSodasButton.style.display = "none";
+      sodaContainer.innerHTML = "<h4>No new sodas are available to serve</h4>";
+      return;
+    }
+
+    addSodasButton.style.display = "";
+    sodaContainer.innerHTML = "";
+
+    sodas.forEach(({ _id, name }) => {
+      const option = document.createElement("option");
+      option.value = _id;
+      option.textContent = name;
+      sodaSelect.appendChild(option);
     });
   }
+
+  // function renderUISodas(sodas) {
+  //   $sodaContainer = $("#sodaContainer");
+  //   const $sodaSelect = $("#sodas");
+  //   if (sodas.length === 0) {
+  //     $("#addSodas").hide();
+  //     $sodaContainer.html("<h4>No new sodas are available to serve</h4>");
+  //   }
+  //   sodas.map((soda) => {
+  //     $sodaSelect.append(`
+
+  //               <option value=${soda._id}> ${soda.name} </option>
+
+  //               `);
+  //   });
+  // }
 
   // Get addSoda button
   const $addSodas = $("#addSodas");
