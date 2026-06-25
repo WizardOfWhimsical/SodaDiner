@@ -18,11 +18,14 @@ const sodaApi = "/api/soda" + sodaId;
 const editBtn = document.getElementById("editSoda");
 
 editBtn?.addEventListener("click", function handler(): void {
-  const name = document.getElementById("name");
-  const brand = document.getElementById("brand");
-  const fizziness = document.getElementById("fizziness");
-  const rating = document.getElementById("rating");
-  const infoContainer = document.getElementById("info") as HTMLElement;
+  function getElById(str: string) {
+    return document.getElementById(str) as HTMLElement;
+  }
+  const name = getElById("name");
+  const brand = getElById("brand");
+  const fizziness = getElById("fizziness");
+  const rating = getElById("rating");
+  const infoContainer = getElById("info");
 
   const nameVal = name?.textContent;
   const brandVal = brand?.textContent;
@@ -75,4 +78,14 @@ async function saveDetails() {
     alert(`Update Successful\n${data}`);
     location.reload();
   }
+}
+
+function renderTextInput(item: string, value: string) {
+  const id = `${item}-input`;
+  return `
+    <div>
+      <label for="${id}">${item.toUpperCase()}: </label>
+      <input id="${id}" name="${item}" class="edit-input" type="text" value="${value}" />
+    </div>
+    `;
 }
