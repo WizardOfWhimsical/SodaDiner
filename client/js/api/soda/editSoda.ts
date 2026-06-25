@@ -1,5 +1,12 @@
 import fetchBase from "../../../src/helpers/api-fetch";
 
+interface Soda {
+  name: string;
+  brand: string;
+  fizziness: number;
+  taste_rating: number;
+}
+
 const cookies = document.cookie;
 const sodaId = cookies
   .split("; ")
