@@ -10,7 +10,7 @@
 
   const editBtn = document.getElementById("editDiner");
 
-  editBtn.addEventListener("click", function () {
+  editBtn.addEventListener("click", function switchMaterial() {
     const name = document.getElementById("name");
     const location = document.getElementById("location");
     const sodaCont = document.getElementById("sodas");
@@ -32,7 +32,7 @@
     }
 
     this.textContent = "Save";
-    this.removeEventListener("click", arguments.callee);
+    this.removeEventListener("click", switchMaterial);
     this.addEventListener("click", saveDetails);
   });
 
