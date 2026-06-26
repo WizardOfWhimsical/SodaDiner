@@ -49,13 +49,12 @@ function getDiners() {
     .then((data) => {
       renderDiners(data);
     })
-    .catch((err) => console.log(err, "Something went wrong fetching diners"));
+    .catch((err) => console.log("Something went wrong fetching diners\n", err));
 }
 
 // Render diners on page
 function renderDiners({ diners }) {
   const dinerDiv = document.getElementById("diners");
-  // cant i shortCircut these?
   if (diners.length === 0) {
     return (dinerDiv.innerHTML = "<h3>There are no diners</h3>");
   }
@@ -69,6 +68,7 @@ function renderDiners({ diners }) {
                      </h5>
                  </div> `;
   });
+  if (!dinerDiv) return;
   dinerDiv.innerHTML = contents;
 
   dinerDiv.addEventListener("click", (e) => {
