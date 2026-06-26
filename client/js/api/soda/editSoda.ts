@@ -1,6 +1,9 @@
 import fetchBase from "../../../src/helpers/api-fetch";
 
 interface Soda {
+  /**
+   * then name of the soda
+   */
   name: string;
   brand: string;
   fizziness: number;
@@ -45,14 +48,14 @@ editBtn?.addEventListener("click", function handler(): void {
 });
 
 async function saveDetails() {
-  function getInputEl(str: string) {
-    return document.querySelector(`input[name=${str}]`) as HTMLInputElement;
+  function getInputElByName(name: string) {
+    return document.querySelector(`input[name=${name}]`) as HTMLInputElement;
   }
 
-  const name = getInputEl("name");
-  const brand = getInputEl("brand");
-  const fizziness = getInputEl("fizziness");
-  const rating = getInputEl("rating");
+  const name = getInputElByName("name");
+  const brand = getInputElByName("brand");
+  const fizziness = getInputElByName("fizziness");
+  const rating = getInputElByName("rating");
 
   const builtSodaObject: Soda = {
     name: name?.value,
@@ -75,16 +78,19 @@ async function saveDetails() {
     return;
   }
   if (data) {
-    alert(`Update Successful\n${data}`);
+    alert(`Update Successful\n${data.name}`);
     location.reload();
+    return;
   }
 }
-
-function renderTextInput(item: string, value: string) {
+/**
+ * Returns HTML string representing and edit field for a soda
+ */
+function renderTextInput(item: string, value: string): string {
   const id = `${item}-input`;
   return `
     <div>
-      <label for="${id}">${item.toUpperCase()}: </label>
+      <label for="${id}">${item}: </label>
       <input id="${id}" name="${item}" class="edit-input" type="text" value="${value}" />
     </div>
     `;
