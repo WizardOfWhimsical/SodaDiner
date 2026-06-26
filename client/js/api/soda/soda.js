@@ -35,10 +35,10 @@
                 </div>
             `;
     });
+    if (!sodaDiv) return;
     sodaDiv.innerHTML = content;
     sodaDiv.addEventListener("click", (e) => {
       const target = e.target.closest("div[id]");
-      console.log(target.id);
       document.cookie = `soda=${target.id}`;
     });
   }
