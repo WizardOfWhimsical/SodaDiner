@@ -15,95 +15,128 @@
   // Api for updating sodas for diner
   const apiUpdateSodas = "/api/diner/" + dinerID + "/sodas";
   // Make diner ajax request
-  $.ajax({
-    type: "GET",
-    url: dinerApi,
+  fetch(dinerApi, {
+    method: "GET",
   })
-    .done((res) => {
-      if (!res.diner) {
-        $("section").text("Please choose a diner");
-      } else {
-        // Render soda in UI
-        renderDiner(res.diner);
-        // Set diner's sodas in global objet
-        window.sodas = res.diner.sodas;
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("failed retrieving diners\n", response);
       }
+      if (!response.diner) {
+        const section = document.querySelector("section");
+        section.innerText = "Please choose a diner";
+      }
+      return response.json();
     })
-    .catch((err) => $("section").text("Please choose a diner"));
+    .then((data) => {
+      console.log("diner resp in add soda\n", data);
+      renderDiner(data.diner);
+      window.sodas = data.diner.sodas;
+    })
+    .catch((err) => {
+      console.log("error\n", err);
+      alert("Oops, something went wrong!");
+    });
+
   // Render the information for Diner
   const renderDiner = ({ name, location, sodas }) => {
-    const $title = $("#title");
-    const $name = $("#name");
-    const $location = $("#location");
+    const titleEl = document.getElementById("title");
+    const nameEl = document.getElementById("name");
+    const locationEl = document.getElementById("location");
     renderDinerSodas(sodas);
     // Assign these elements with the values from the soda object
-    $title.text(name);
-    $name.text(name);
-    $location.text(location);
+    titleEl.innerText = `${name}`;
+    nameEl.innerText = `${name}`;
+    locationEl.innerText = `${location}`;
   };
+
   // Render the sodas that are being served in this diner
   const renderDinerSodas = (sodas) => {
-    const $sodas = $("#sodas");
-    $.ajax({
-      type: "GET",
-      headers: {
-        sodas: sodas,
-      },
-      url: apiServerSoda,
+    const $sodas = document.getElementById("sodas");
+    fetch(apiServerSoda, {
+      method: "GET",
+      headers: { sodas: sodas },
     })
-      .done((res) => {
-        // Get all sodas available to be served
-        const servingSodas = res.sodas;
-        // Get existing sodas in diner
+      .then((resp) => {
+        if (!resp.ok) {
+          throw new Error("failed retrieving sodas\n", resp);
+        }
+        return resp.json();
+      })
+      .then((data) => {
+        console.log(data);
+        const servingSodas = data.sodas;
         const dinerSodas = window.sodas.map((soda) => soda._id);
-        // Filter out the sodas that already exist in diner from sodas to be served
         let sodasToBeServed = servingSodas.filter((soda) =>
           dinerSodas.indexOf(soda._id) === -1 ? soda : "",
         );
-        // Return the sodas to be served to render in the UI
         renderUISodas(sodasToBeServed);
-      })
-      .catch((err) => console.log(err));
+      });
   };
 
   function renderUISodas(sodas) {
-    $sodaContainer = $("#sodaContainer");
-    const $sodaSelect = $("#sodas");
-    if (sodas.length === 0) {
-      $("#addSodas").hide();
-      $sodaContainer.html("<h4>No new sodas are available to serve</h4>");
-    }
-    sodas.map((soda) => {
-      $sodaSelect.append(`
+    const sodaContainer = document.getElementById("sodaContainer");
+    const sodaSelect = document.getElementById("sodas");
+    const addSodasButton = document.getElementById("addSodas");
 
-                <option value=${soda._id}> ${soda.name} </option>
-            
-                `);
+    sodaSelect.innerHTML = "";
+
+    if (!Array.isArray(sodas) || sodas.length === 0) {
+      addSodasButton.style.display = "none";
+      sodaContainer.innerHTML = "<h4>No new sodas are available to serve</h4>";
+      return;
+    }
+
+    addSodasButton.style.display = "";
+    sodaContainer.innerHTML = "";
+    const fragment = document.createDocumentFragment();
+
+    sodas.forEach(({ _id, name }) => {
+      const option = document.createElement("option");
+      option.value = _id;
+      option.textContent = name;
+      fragment.append(option);
     });
+    sodaSelect.appendChild(fragment);
   }
 
-  // Get addSoda button
-  const $addSodas = $("#addSodas");
+  const addSodasButton = document.getElementById("addSodas");
+
+  function getSelectedSodaIds() {
+    const sodaSelect = document.querySelector("select[name='sodas']");
+    return Array.from(sodaSelect.selectedOptions, (option) => option.value);
+  }
+
   function addSodas() {
-    // Get the values of the sodas
-    const sodas = $("select[name='sodas']").val();
-    if (sodas.length === 0) return alert("Please choose soda(s)");
-    // Create object for soda
-    const data = { sodas: sodas };
-    // Update diner for new sodas being added
-    $.ajax({
-      type: "PUT",
-      url: apiUpdateSodas,
-      data: data,
+    const sodas = getSelectedSodaIds();
+
+    if (sodas.length === 0) {
+      alert("Please choose soda(s)");
+      return;
+    }
+
+    const body = new URLSearchParams();
+    sodas.forEach((id) => body.append("sodas", id));
+
+    fetch(apiUpdateSodas, {
+      method: "PUT",
+      body,
     })
-      .done((res) => {
-        // Successful response
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed updating diner");
+        }
+        return response.json();
+      })
+      .then(() => {
         alert("Saved sodas to diner");
-        // Return to diner's details page
         window.location = "./diner.html";
       })
-      .catch((err) => alert("Oops, something went wrong updating diner!"));
+      .catch((err) => {
+        console.error(err);
+        alert("Oops, something went wrong updating diner!");
+      });
   }
 
-  $addSodas.on("click", addSodas);
+  addSodasButton.addEventListener("click", addSodas);
 })();
