@@ -66,7 +66,7 @@
 
   // Delete soda
   function deleteSoda() {
-    fetch(sodaApi, {
+    fetch(dinerApi, {
       method: "DELETE",
     })
       .then((res) => {
