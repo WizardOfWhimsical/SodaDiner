@@ -1,4 +1,5 @@
 import fetchBase from "../../../src/helpers/api-fetch";
+import { getElById, getInputElByName } from "../../../src/helpers/getElement";
 
 interface Soda {
   /**
@@ -21,9 +22,6 @@ const sodaApi = "/api/soda" + sodaId;
 const editBtn = document.getElementById("editSoda");
 
 editBtn?.addEventListener("click", function handler(): void {
-  function getElById(str: string) {
-    return document.getElementById(str) as HTMLElement;
-  }
   const name = getElById("name");
   const brand = getElById("brand");
   const fizziness = getElById("fizziness");
@@ -48,10 +46,6 @@ editBtn?.addEventListener("click", function handler(): void {
 });
 
 async function saveDetails() {
-  function getInputElByName(name: string) {
-    return document.querySelector(`input[name=${name}]`) as HTMLInputElement;
-  }
-
   const name = getInputElByName("name");
   const brand = getInputElByName("brand");
   const fizziness = getInputElByName("fizziness");
