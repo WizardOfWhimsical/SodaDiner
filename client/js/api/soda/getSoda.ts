@@ -3,7 +3,7 @@ import fetchBase from "../../../src/helpers/api-fetch";
 
 interface Soda {
   /**
-   * then name of the soda
+   * the soda name
    */
   name: string;
   brand: string;
@@ -29,11 +29,27 @@ const section = document.querySelector("section") as HTMLElement;
 
 section.textContent = "Please choose a soda";
 
-const { data, error } = await fetchBase<Soda>(sodaApi);
+const { data, error } = await fetchBase(sodaApi);
 if (error) {
   console.log(error.message, { error });
   alert(`Opps, something went wrong\ncheck the logs`);
 }
 if (data) {
+  //its an array of sodas?
   renderSoda(data.soda);
+}
+
+function renderSoda({ name, brand, fizziness, rating, served }: Soda) {
+  const showTitle = getElById("title");
+  const showName = getElById("name");
+  const showBrand = getElById("brand");
+  const showFizz = getElById("fizziness");
+  const showRating = getElById("rating");
+
+  showTitle.textContent = name;
+  showName.textContent = name;
+  showBrand.textContent = brand;
+  showFizz.textContent = `${fizziness}`;
+  showRating.textContent = `${rating}`;
+  served.textContent = `${served}`;
 }
