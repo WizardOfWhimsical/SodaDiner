@@ -24,32 +24,32 @@ const sodaApi = "/api/soda/" + sodaId;
 const apiServerUpdateSodan = "/api/soda/updateSoda/" + sodaId;
 const serveSoda = getElById("serveSoda");
 const deleteBtn = getElById("deleteSoda");
-const served = getElById("served");
+const servedEl = getElById("served");
 const section = document.querySelector("section") as HTMLElement;
 
 section.textContent = "Please choose a soda";
 
-const { data, error } = await fetchBase(sodaApi);
+const { data, error } = await fetchBase<Soda>(sodaApi);
 if (error) {
   console.log(error.message, { error });
   alert(`Opps, something went wrong\ncheck the logs`);
 }
 if (data) {
   //its an array of sodas?
-  renderSoda(data.soda);
+  renderSoda(data);
 }
 
 function renderSoda({ name, brand, fizziness, rating, served }: Soda) {
-  const showTitle = getElById("title");
-  const showName = getElById("name");
-  const showBrand = getElById("brand");
-  const showFizz = getElById("fizziness");
-  const showRating = getElById("rating");
+  const showTitleEl = getElById("title");
+  const showNameEl = getElById("name");
+  const showBrandEl = getElById("brand");
+  const showFizzEl = getElById("fizziness");
+  const showRatingEl = getElById("rating");
 
-  showTitle.textContent = name;
-  showName.textContent = name;
-  showBrand.textContent = brand;
-  showFizz.textContent = `${fizziness}`;
-  showRating.textContent = `${rating}`;
-  served.textContent = `${served}`;
+  showTitleEl.textContent = name;
+  showNameEl.textContent = name;
+  showBrandEl.textContent = brand;
+  showFizzEl.textContent = `${fizziness}`;
+  showRatingEl.textContent = `${rating}`;
+  servedEl.textContent = `${served}`;
 }
