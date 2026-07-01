@@ -73,6 +73,7 @@ async function updateSoda() {
   if (error) {
     console.log(error.message, { error });
     alert(`Opps, something went wrong\ncheck the logs`);
+    return;
   }
   if (data) {
     const { serving } = data as { serving: boolean };
@@ -84,5 +85,20 @@ async function updateSoda() {
       servedEl.textContent = `${serving}`;
       serveSodaEl.textContent = "Serve soda";
     }
+  }
+  return;
+}
+
+deleteBtn.addEventListener("click", deleteSoda);
+
+async function deleteSoda() {
+  const { data, error } = await fetchBase(sodaApi, { method: "DELETE" });
+  if (error) {
+    console.log("Delete Soda\n", { error });
+    return;
+  }
+  if (data) {
+    alert("Soda successfully deleted!");
+    window.location.href = "./sodas.html";
   }
 }
