@@ -21,11 +21,13 @@ const sodaId = cookies
   ?.split("=");
 
 const sodaApi = "/api/soda/" + sodaId;
-const apiServerUpdateSodan = "/api/soda/updateSoda/" + sodaId;
+const apiServerUpdateSoda = "/api/soda/updateSoda/" + sodaId;
 const serveSodaEl = getElById("serveSoda");
 const deleteBtn = getElById("deleteSoda");
 const servedEl = getElById("served");
 const sectionEl = document.querySelector("section") as HTMLElement;
+
+let sodaServed: boolean;
 
 sectionEl.textContent = "Please choose a soda";
 
@@ -59,14 +61,28 @@ function renderSoda({ name, brand, fizziness, rating, served }: Soda) {
   serveSodaEl.addEventListener("click", updateSoda);
 }
 
-function updateSoda() {
-  //Ej, i searched and could not find a refrence to this window obj that is created. i assume then it will always return null.
-  const serving = null;
+async function updateSoda() {
+  //got to find out the shape of this return
+  const serving = sodaServed;
   const updateValue = serving ? false : true;
-
-  fetchBase(apiServerUpdateSodan, {
+  const { data, error } = await fetchBase(apiServerUpdateSoda, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ serving: updateValue }),
   });
+  if (error) {
+    console.log(error.message, { error });
+    alert(`Opps, something went wrong\ncheck the logs`);
+  }
+  if (data) {
+    const { serving } = data as { serving: boolean };
+    sodaServed = updateValue;
+    if (updateValue) {
+      servedEl.textContent = `${serving}`;
+      serveSodaEl.textContent = "Stop serving soda";
+    } else {
+      servedEl.textContent = `${serving}`;
+      serveSodaEl.textContent = "Serve soda";
+    }
+  }
 }
