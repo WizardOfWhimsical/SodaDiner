@@ -22,12 +22,12 @@ const sodaId = cookies
 
 const sodaApi = "/api/soda/" + sodaId;
 const apiServerUpdateSodan = "/api/soda/updateSoda/" + sodaId;
-const serveSoda = getElById("serveSoda");
+const serveSodaEl = getElById("serveSoda");
 const deleteBtn = getElById("deleteSoda");
 const servedEl = getElById("served");
-const section = document.querySelector("section") as HTMLElement;
+const sectionEl = document.querySelector("section") as HTMLElement;
 
-section.textContent = "Please choose a soda";
+sectionEl.textContent = "Please choose a soda";
 
 const { data, error } = await fetchBase<Soda>(sodaApi);
 if (error) {
@@ -52,4 +52,8 @@ function renderSoda({ name, brand, fizziness, rating, served }: Soda) {
   showFizzEl.textContent = `${fizziness}`;
   showRatingEl.textContent = `${rating}`;
   servedEl.textContent = `${served}`;
+
+  !served
+    ? (serveSodaEl.textContent = "Serve soda")
+    : (serveSodaEl.textContent = "Stop serving");
 }
