@@ -80,28 +80,24 @@
       return;
     }
 
-    addSodasButton.style.display = "";
-    sodaContainer.innerHTML = "";
+    // addSodasButton.style.display = "";
+    // sodaContainer.innerHTML = "";
 
     const fragment = document.createDocumentFragment();
-    console.log("under frag", sodas);
 
     sodas.forEach(({ _id, name }) => {
       const option = document.createElement("option");
       option.value = `${_id}`;
       option.textContent = `${name}`;
-      console.log("rendering sodes\n", name, _id);
       fragment.append(option);
     });
     return sodaSelect.appendChild(fragment);
-    console.log("fragment", fragment);
   }
 
   const addSodasButton = document.getElementById("addSodas");
 
   function getSelectedSodaIds() {
     const sodaSelect = document.querySelector("select[name='sodas']");
-    console.log("sodaselect\n", sodaSelect);
     return Array.from(sodaSelect?.selectedOptions, (option) => option.value);
   }
 
@@ -113,12 +109,10 @@
       return;
     }
 
-    const body = new URLSearchParams();
-    sodas.forEach((id) => body.append("sodas", id));
-
     fetch(apiUpdateSodas, {
       method: "PUT",
-      body,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ sodas }),
     })
       .then((response) => {
         if (!response.ok) {
@@ -135,6 +129,5 @@
         alert("Oops, something went wrong updating diner!");
       });
   }
-
   addSodasButton.addEventListener("click", addSodas);
 })();
