@@ -56,4 +56,17 @@ function renderSoda({ name, brand, fizziness, rating, served }: Soda) {
   !served
     ? (serveSodaEl.textContent = "Serve soda")
     : (serveSodaEl.textContent = "Stop serving");
+  serveSodaEl.addEventListener("click", updateSoda);
+}
+
+function updateSoda() {
+  //Ej, i searched and could not find a refrence to this window obj that is created. i assume then it will always return null.
+  const serving = null;
+  const updateValue = serving ? false : true;
+
+  fetchBase(apiServerUpdateSodan, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ serving: updateValue }),
+  });
 }
