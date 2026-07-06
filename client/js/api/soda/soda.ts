@@ -1,6 +1,6 @@
 import fetchBase from "../../../src/helpers/api-fetch";
 
-const form = document.getElementById("soda-form") as HTMLElement;
+const form = document.getElementById("soda-form") as HTMLFormElement;
 const apiServerSoda = "/api/sodas";
 /**
  * i know the shap of data coming into here and want to declaire it but it is more difficult that i thought to put it together
@@ -57,3 +57,7 @@ function renderSodas(sodas: Array<Soda>): void {
     document.cookie = `soda=${targetEl?.id}`;
   });
 }
+
+form?.addEventListener("submit", (e) => {
+  e.preventDefault();
+});
