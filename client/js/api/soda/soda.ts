@@ -15,6 +15,13 @@ interface Soda {
   served: boolean;
 }
 
+interface NewSoda {
+  name: string;
+  brand: string;
+  fizziness: number;
+  taste_rating: number;
+}
+
 async function getSodas() {
   const { data, error } = await fetchBase<Soda[]>(apiServerSoda);
   if (error) {
@@ -29,7 +36,7 @@ async function getSodas() {
 getSodas();
 
 function renderSodas(sodas: Array<Soda>): void {
-  const sodaDiv = document.getElementById("sodas");
+  const sodaDiv = document.getElementById("sodas") as HTMLElement;
 
   if (!sodaDiv) return;
 
@@ -53,11 +60,23 @@ function renderSodas(sodas: Array<Soda>): void {
   sodaDiv.addEventListener("click", (e) => {
     const target = e.target as HTMLElement;
     const targetEl = target?.closest("div[id]");
-    console.log(targetEl?.id);
     document.cookie = `soda=${targetEl?.id}`;
   });
 }
 
 form?.addEventListener("submit", (e) => {
   e.preventDefault();
+  const target = e.target as HTMLFormElement & {
+    name: HTMLInputElement;
+    brand: HTMLInputElement;
+    fizziness: HTMLInputElement;
+    taste_rating: HTMLInputElement;
+  };
+
+  const data: NewSoda = {
+    name: target.name.value,
+    brand: target.brand.value,
+    fizziness: parseInt(target.fizziness.value),
+    taste_rating: parseInt(target.taste_rating.value),
+  };
 });
