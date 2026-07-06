@@ -30,7 +30,7 @@ async function getSodas() {
   }
 
   console.log("fetch success\n", data);
-  // renderSodas(data);
+  renderSodas(data);
 }
 
 getSodas();
@@ -64,7 +64,7 @@ function renderSodas(sodas: Array<Soda>): void {
   });
 }
 
-form?.addEventListener("submit", (e) => {
+form?.addEventListener("submit", async (e) => {
   e.preventDefault();
   const target = e.target as HTMLFormElement & {
     name: HTMLInputElement;
@@ -73,10 +73,26 @@ form?.addEventListener("submit", (e) => {
     taste_rating: HTMLInputElement;
   };
 
-  const data: NewSoda = {
+  const newData: NewSoda = {
     name: target.name.value,
     brand: target.brand.value,
     fizziness: parseInt(target.fizziness.value),
     taste_rating: parseInt(target.taste_rating.value),
   };
+
+  const { data, error } = await fetchBase(apiServerSoda, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newData),
+  });
+
+  if (error) {
+    console.log(error.message, { error });
+    alert(`Opps, something went wrong\ncheck the logs`);
+  }
+
+  if (data) {
+    alert("Soda Successfully saved!");
+    window.location.href = "./sodas.html";
+  }
 });
