@@ -60,10 +60,7 @@ function renderDiner({ name, sodas }: Diner) {
 async function renderDinerSodas(sodas: Soda[]) {
   const sodaDiv = getElById("sodas");
 
-  const { data, error } = (await fetchBase(apiServerSoda, {
-    method: "GET",
-    headers: { sodas: JSON.stringify(sodas) } as HeadersInit,
-  })) as { data: { sodas: Soda[] }; error: any };
+  const { data, error } = await fetchBase<{ sodas: Soda[] }>(apiServerSoda);
 
   if (error) {
     console.log("error\n", error);
@@ -82,4 +79,10 @@ async function renderDinerSodas(sodas: Soda[]) {
     );
     renderUISodas(sodasToBeServed);
   }
+}
+
+function renderUISodas(sodas: Soda[]) {
+  const sodaContainer = getElById("sodaContainer");
+  const sodaSelect = getElById("sodas");
+  const addSodasButton = getElById("addSodas");
 }
