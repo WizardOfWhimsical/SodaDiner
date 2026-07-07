@@ -46,3 +46,13 @@ if (data) {
   const section = document.querySelector("section") as HTMLElement;
   section.innerText = "Please choose a diner";
 }
+
+function renderDiner({ name, sodas }: Diner) {
+  const titleEl = getElById("title");
+  const nameEl = getElById("name");
+
+  renderDinerSodas(sodas);
+
+  titleEl.innerText = `${name}`;
+  nameEl.innerText = `${name}`;
+}
