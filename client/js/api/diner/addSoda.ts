@@ -26,7 +26,7 @@ const dinerID = cookies
 const dinerApi = "/api/diner/" + dinerID;
 const apiServerSoda = "/api/sodas/serving";
 const apiUpdateSodas = "/api/diner/" + dinerID + "/sodas";
-let sodas = null;
+let sodas = [];
 
 const { data, error } = (await fetchBase(dinerApi)) as {
   data: { diner: Diner };
@@ -40,7 +40,6 @@ if (error) {
 
 if (data) {
   renderDiner(data.diner);
-
   ({ sodas } = data.diner);
 } else {
   const section = document.querySelector("section") as HTMLElement;
@@ -56,3 +55,5 @@ function renderDiner({ name, sodas }: Diner) {
   titleEl.innerText = `${name}`;
   nameEl.innerText = `${name}`;
 }
+
+async function renderDinerSodas(sodas: Soda[]) {}
