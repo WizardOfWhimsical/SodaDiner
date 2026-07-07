@@ -85,4 +85,21 @@ function renderUISodas(sodas: Soda[]) {
   const sodaContainer = getElById("sodaContainer");
   const sodaSelect = getElById("sodas");
   const addSodasButton = getElById("addSodas");
+
+  if (!Array.isArray(sodas) || sodas.length === 0) {
+    addSodasButton.style.display = "none";
+    sodaContainer.innerHTML = "<h4>No new sodas are available to serve</h4>";
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+
+  sodas.forEach(({ _id, name }) => {
+    const option = document.createElement("option");
+    option.value = _id;
+    option.textContent = name;
+    fragment.append(option);
+  });
+  sodaSelect.appendChild(fragment);
+  return;
 }
