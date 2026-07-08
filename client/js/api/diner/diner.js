@@ -28,7 +28,6 @@ function renderOptionElements({ sodas }) {
     return (sodasContainer.innerHTML = `<h4> There are no sodas being served at the moment </h4>`);
   }
 
-  // its only taking the last soda, i think this needs to be an array to hold multiple values
   let contents = "";
   sodas.map((soda) => {
     contents += `<option value=${soda._id}> ${soda.name} </option>`;
