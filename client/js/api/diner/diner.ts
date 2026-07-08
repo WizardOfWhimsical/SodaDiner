@@ -36,3 +36,24 @@ async function getSodas() {
     renderOptionElements(data);
   }
 }
+//see about setting a check to call based on html file loaded
+getSodas();
+
+function renderOptionElements({ sodas }: { sodas: Soda[] }) {
+  if (sodas.length === 0) {
+    if (sodaContainer) {
+      sodaContainer.innerHTML = "<h4>No sodas server here</h4>";
+    }
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+
+  sodas.map((soda) => {
+    const option = document.createElement("option");
+    option.value = soda._id;
+    option.textContent = soda.name;
+    fragment.append(option);
+  });
+  if (sodaContainer) sodaContainer.appendChild(fragment);
+}
