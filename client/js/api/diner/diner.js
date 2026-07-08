@@ -1,6 +1,4 @@
 const dinerForm = document.getElementById("diner-form");
-// Diner container??not used
-// const dinersContainer = document.getElementById("diners-container");
 const sodasContainer = document.getElementById("sodas-container");
 
 const apiServerDiners = "/api/diners";
