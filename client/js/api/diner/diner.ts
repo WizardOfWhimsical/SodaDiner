@@ -96,4 +96,12 @@ function renderDiners({ diners }: { diners: Diner[] }) {
     divContentContainer.append(holdingHeader);
     fragment.appendChild(divContentContainer);
   });
+
+  dinerDiv.appendChild(fragment);
+
+  dinerDiv.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    const targetEl = target?.closest("div[id]");
+    document.cookie = `diner=${targetEl?.id}`;
+  });
 }
