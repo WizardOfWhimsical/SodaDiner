@@ -57,3 +57,16 @@ function renderOptionElements({ sodas }: { sodas: Soda[] }) {
   });
   if (sodaContainer) sodaContainer.appendChild(fragment);
 }
+
+async function getDiners() {
+  const { data, error } = await fetchBase<{ diners: Diner[] }>(apiServerDiners);
+
+  if (error) {
+    alert("Something in went\nwrong, check logs");
+    console.log("fetching diners failed\n", error);
+  }
+
+  if (data) {
+    renderDiners(data);
+  }
+}
