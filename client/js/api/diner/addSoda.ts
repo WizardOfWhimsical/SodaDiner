@@ -103,3 +103,37 @@ function renderUISodas(sodas: Soda[]) {
   sodaSelect.appendChild(fragment);
   return;
 }
+
+const addSodasButton = getElById("addSodas");
+
+function getSelectedSodaIds() {
+  const sodaSelect = document.querySelector<HTMLSelectElement>(
+    "select[name='sodas']",
+  )!;
+  return Array.from(sodaSelect?.selectedOptions, (option) => option.value);
+}
+
+async function addSodas() {
+  const sodas = getSelectedSodaIds();
+
+  if (sodas.length === 0) {
+    alert("Please choose soda(s)");
+    return;
+  }
+
+  const { error } = await fetchBase(apiUpdateSodas, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ sodas }),
+  });
+
+  if (error) {
+    console.log("error\n", error);
+    alert("Oops, something went wrong!");
+  }
+
+  alert("Saved sodas to diner");
+  window.location.href = "./diner.html";
+}
+
+addSodasButton.addEventListener("click", addSodas);
