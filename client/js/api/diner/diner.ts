@@ -47,6 +47,8 @@ function renderOptionElements({ sodas }: { sodas: Soda[] }) {
     return;
   }
 
+  if (!sodaContainer) return;
+
   const fragment = document.createDocumentFragment();
 
   sodas.map((soda) => {
@@ -55,7 +57,7 @@ function renderOptionElements({ sodas }: { sodas: Soda[] }) {
     option.textContent = soda.name;
     fragment.append(option);
   });
-  if (sodaContainer) sodaContainer.appendChild(fragment);
+  sodaContainer.appendChild(fragment);
 }
 
 async function getDiners() {
@@ -69,4 +71,29 @@ async function getDiners() {
   if (data) {
     renderDiners(data);
   }
+}
+
+function renderDiners({ diners }: { diners: Diner[] }) {
+  const dinerDiv = getElById("diners");
+  if (diners.length === 0) {
+    if (dinerDiv) {
+      dinerDiv.innerHTML = "<h4>There are no diners</h4>";
+    }
+    return;
+  }
+  if (!dinerDiv) return;
+
+  const fragment = document.createDocumentFragment();
+  diners.map((diner) => {
+    const divContentContainer = document.createElement("div");
+    const anchor = document.createElement("a");
+    const holdingHeader = document.createElement("h5");
+    divContentContainer.id = diner._id;
+    anchor.classList = "diner-link";
+    anchor.href = "./diner.html";
+    anchor.textContent = diner.name;
+    holdingHeader.append(anchor);
+    divContentContainer.append(holdingHeader);
+    fragment.appendChild(divContentContainer);
+  });
 }
