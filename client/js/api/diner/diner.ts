@@ -105,3 +105,28 @@ function renderDiners({ diners }: { diners: Diner[] }) {
     document.cookie = `diner=${targetEl?.id}`;
   });
 }
+getDiners();
+
+function getSelectedSodaIds() {
+  const sodaSelect = document.querySelector<HTMLSelectElement>(
+    "select[name='sodas']",
+  )!;
+  return Array.from(sodaSelect?.selectedOptions, (option) => option.value);
+}
+
+dinerForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const target = e.target as HTMLFormElement & {
+    name: HTMLInputElement;
+    location: HTMLInputElement;
+  };
+
+  const sodas = getSelectedSodaIds();
+
+  const data: Diner = {
+    name: target.name.value,
+    location: target.location.value,
+    sodas: sodas,
+  };
+});
