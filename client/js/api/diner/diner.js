@@ -1,13 +1,10 @@
 const dinerForm = document.getElementById("diner-form");
-// Diner container??not used
-// const dinersContainer = document.getElementById("diners-container");
 const sodasContainer = document.getElementById("sodas-container");
 
 const apiServerDiners = "/api/diners";
 const apiServerDiner = "/api/diner";
 const apiServerSoda = "/api/sodas/serving";
 
-// if invoked immediatly why not just run the code?
 function getSodas() {
   fetch(apiServerSoda)
     .then((res) => {
@@ -17,12 +14,12 @@ function getSodas() {
       return res.json();
     })
     .then((data) => {
+      console.log("needing the data shape", data);
       renderOptionElements(data);
     })
     .catch((err) => console.log(err, "Something went wrong fetching sodas"));
 }
 
-// this is erroring becuase we are not needing it till page change
 getSodas();
 
 function renderOptionElements({ sodas }) {
@@ -30,7 +27,6 @@ function renderOptionElements({ sodas }) {
     return (sodasContainer.innerHTML = `<h4> There are no sodas being served at the moment </h4>`);
   }
 
-  // its only taking the last soda, i think this needs to be an array to hold multiple values
   let contents = "";
   sodas.map((soda) => {
     contents += `<option value=${soda._id}> ${soda.name} </option>`;
