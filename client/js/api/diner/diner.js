@@ -5,7 +5,6 @@ const apiServerDiners = "/api/diners";
 const apiServerDiner = "/api/diner";
 const apiServerSoda = "/api/sodas/serving";
 
-// if invoked immediatly why not just run the code?
 function getSodas() {
   fetch(apiServerSoda)
     .then((res) => {
@@ -15,12 +14,12 @@ function getSodas() {
       return res.json();
     })
     .then((data) => {
+      console.log("needing the data shape", data);
       renderOptionElements(data);
     })
     .catch((err) => console.log(err, "Something went wrong fetching sodas"));
 }
 
-// this is erroring becuase we are not needing it till page change
 getSodas();
 
 function renderOptionElements({ sodas }) {

@@ -10,13 +10,18 @@ interface Soda {
   served: boolean;
 }
 
-interface Diner {
+interface GetDiner {
   name: string;
   location: string;
   _id: string;
   sodas: string | string[];
 }
 
+interface NewDiner {
+  name: string;
+  location: string;
+  sodas: string | string[];
+}
 const dinerForm = document.getElementById("diner-form") as HTMLFormElement;
 const sodaContainer = getElById("soda-container");
 
@@ -61,7 +66,9 @@ function renderOptionElements({ sodas }: { sodas: Soda[] }) {
 }
 
 async function getDiners() {
-  const { data, error } = await fetchBase<{ diners: Diner[] }>(apiServerDiners);
+  const { data, error } = await fetchBase<{ diners: GetDiner[] }>(
+    apiServerDiners,
+  );
 
   if (error) {
     alert("Something in went\nwrong, check logs");
@@ -73,7 +80,7 @@ async function getDiners() {
   }
 }
 
-function renderDiners({ diners }: { diners: Diner[] }) {
+function renderDiners({ diners }: { diners: GetDiner[] }) {
   const dinerDiv = getElById("diners");
   if (diners.length === 0) {
     if (dinerDiv) {
@@ -88,7 +95,7 @@ function renderDiners({ diners }: { diners: Diner[] }) {
     const divContentContainer = document.createElement("div");
     const anchor = document.createElement("a");
     const holdingHeader = document.createElement("h5");
-    divContentContainer.id = diner._id;
+    divContentContainer.id = diner._id as string;
     anchor.classList = "diner-link";
     anchor.href = "./diner.html";
     anchor.textContent = diner.name;
@@ -121,12 +128,27 @@ dinerForm.addEventListener("submit", async (e) => {
     name: HTMLInputElement;
     location: HTMLInputElement;
   };
-
+  //this is a repeat, locate and make imports
   const sodas = getSelectedSodaIds();
 
-  const data: Diner = {
+  const newDiner: NewDiner = {
     name: target.name.value,
     location: target.location.value,
     sodas: sodas,
   };
+  const { data, error } = await fetchBase<{ diner: GetDiner }>(apiServerDiner, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newDiner),
+  });
+
+  if (error) {
+    alert("something went wrong,c heck the logs");
+    console.log("error in creating diner\n", error);
+  }
+
+  if (data) {
+    alert("Diner Successfully saved!");
+    window.location.href = "./diners.html";
+  }
 });
