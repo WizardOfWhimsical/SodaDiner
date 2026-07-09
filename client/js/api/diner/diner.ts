@@ -14,7 +14,7 @@ interface Diner {
   name: string;
   location: string;
   _id: string;
-  sodas: Soda[];
+  sodas: string | string[];
 }
 
 const dinerForm = document.getElementById("diner-form") as HTMLFormElement;
