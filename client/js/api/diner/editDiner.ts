@@ -40,6 +40,10 @@ editBtn.addEventListener("click", function switchMaterial() {
     });
     child.appendChild(removeBtn);
   }
+
+  this.textContent = "Save";
+  this.removeEventListener("click", switchMaterial);
+  this.addEventListener("click", saveDetails);
 });
 
 function editingInput(nameValue: string, inputValue: string) {
