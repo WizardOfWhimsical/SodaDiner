@@ -20,4 +20,16 @@ editBtn.addEventListener("click", function switchMaterial() {
   const name = getInputElByName("name");
   const location = getInputElByName("location");
   const sodaCont = getElById("sodas");
+
+  const nameValue = name.textContent;
+  const locationValue = location.textContent;
 });
+
+function editingInput(nameValue: string, inputValue: string) {
+  const inputEl = document.createElement("input");
+  inputEl.name = `${nameValue}`;
+  inputEl.className = "edit-input";
+  inputEl.type = "text";
+  inputEl.value = `${inputValue}`;
+  return inputEl;
+}
