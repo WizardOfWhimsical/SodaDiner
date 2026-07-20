@@ -5,6 +5,12 @@ import {
   getInputElByName,
 } from "../../../src/helpers/getElement";
 
+interface NewDiner {
+  name: string;
+  location: string;
+  sodas: string | string[];
+}
+
 const cookies = document.cookie;
 
 const dinerID = cookies
@@ -48,10 +54,19 @@ editBtn.addEventListener("click", function switchMaterial() {
 
 async function saveDetails() {
   const name = getInputElByName("name");
-  const location = getInputElByName("location");
-
   const nameValue = name.value;
+
+  const location = getInputElByName("location");
   const locationValue = location.value;
+
+  const sodas = getElById("sodas");
+  const sodasChildren = sodas.children;
+
+  const dinerObject: NewDiner = {
+    name: nameValue,
+    location: locationValue,
+    sodas: sodasIds,
+  };
 }
 
 function editingInput(nameValue: string, inputValue: string) {
