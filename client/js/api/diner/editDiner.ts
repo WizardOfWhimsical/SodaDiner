@@ -29,6 +29,10 @@ editBtn.addEventListener("click", function switchMaterial() {
 
   name.append(nameInput);
   location.append(locationInput);
+
+  for (let child of sodaCont.childNodes) {
+    const removeBtn = document.createElement("button");
+  }
 });
 
 function editingInput(nameValue: string, inputValue: string) {
