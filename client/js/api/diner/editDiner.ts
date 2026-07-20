@@ -46,6 +46,14 @@ editBtn.addEventListener("click", function switchMaterial() {
   this.addEventListener("click", saveDetails);
 });
 
+async function saveDetails() {
+  const name = getInputElByName("name");
+  const location = getInputElByName("location");
+
+  const nameValue = name.value;
+  const locationValue = location.value;
+}
+
 function editingInput(nameValue: string, inputValue: string) {
   const inputEl = document.createElement("input");
   inputEl.name = `${nameValue}`;
