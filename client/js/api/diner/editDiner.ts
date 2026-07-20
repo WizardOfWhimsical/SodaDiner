@@ -62,6 +62,11 @@ async function saveDetails() {
   const sodas = getElById("sodas");
   const sodasChildren = sodas.children;
 
+  const sodasIds: string[] = [];
+  for (let soda of sodasChildren) {
+    sodasIds.push(soda.id);
+  }
+
   const dinerObject: NewDiner = {
     name: nameValue,
     location: locationValue,
