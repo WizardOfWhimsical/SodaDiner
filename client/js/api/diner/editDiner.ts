@@ -23,6 +23,12 @@ editBtn.addEventListener("click", function switchMaterial() {
 
   const nameValue = name.textContent;
   const locationValue = location.textContent;
+
+  const nameInput = editingInput("name", nameValue);
+  const locationInput = editingInput("location", locationValue);
+
+  name.append(nameInput);
+  location.append(locationInput);
 });
 
 function editingInput(nameValue: string, inputValue: string) {
