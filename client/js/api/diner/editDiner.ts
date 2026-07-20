@@ -32,6 +32,13 @@ editBtn.addEventListener("click", function switchMaterial() {
 
   for (let child of sodaCont.childNodes) {
     const removeBtn = document.createElement("button");
+    removeBtn.className = "btn btn-danger deleteSodaBtn";
+    removeBtn.textContent = "Remove";
+    removeBtn.type = "button";
+    removeBtn.addEventListener("click", () => {
+      child.remove();
+    });
+    child.appendChild(removeBtn);
   }
 });
 
