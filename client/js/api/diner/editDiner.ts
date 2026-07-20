@@ -72,6 +72,22 @@ async function saveDetails() {
     location: locationValue,
     sodas: sodasIds,
   };
+
+  const { data, error } = await fetchBase<NewDiner>(dinerApi, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(dinerObject),
+  });
+
+  if (error) {
+    console.log("Updating diner failed", error);
+    alert("update failed check logs");
+  }
+
+  if (data) {
+    alert("Updated diner!");
+    window.location.reload();
+  }
 }
 
 function editingInput(nameValue: string, inputValue: string) {
