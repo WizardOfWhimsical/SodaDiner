@@ -46,5 +46,14 @@ function renderDiner({ name, location, sodas }: Diner): void {
   nameEl.textContent = name;
   locationEl.textContent = location;
 
-  rednerDinerSodas(sodas);
+  renderDinerSodas(sodas);
+}
+
+function renderDinerSodas({ sodas }: string | string[]) {
+  const sodasDiv = getElById("sodas");
+
+  if (sodas.length === 0) {
+    sodasDiv.textContent = "No sodas are being served";
+    return;
+  }
 }
