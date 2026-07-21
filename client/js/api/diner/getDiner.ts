@@ -25,3 +25,14 @@ const { data, error } = await fetchBase<{ diner: Diner }>(dinerApi);
 
 const sectionEl = document.querySelector("section") as HTMLElement;
 sectionEl.textContent = "Please choose a diner";
+
+if (error) {
+  console.log("diners get:\n", error);
+  alert("Something went wrong, check the logs");
+}
+
+if (data) {
+  if (data.diner) {
+    renderDiner(data.diner);
+  }
+}
