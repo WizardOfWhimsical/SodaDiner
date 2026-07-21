@@ -5,6 +5,9 @@ import {
   getInputElByName,
 } from "../../../src/helpers/getElement";
 
+/**
+ * Diner returned has "id" attached
+ */
 interface NewDiner {
   name: string;
   location: string;
