@@ -22,3 +22,6 @@ const dinerApi = "/api/diner/" + dinerId;
 const deleteButton = getButtonElById("deleteDiner");
 
 const { data, error } = await fetchBase<{ diner: Diner }>(dinerApi);
+
+const sectionEl = document.querySelector("section") as HTMLElement;
+sectionEl.textContent = "Please choose a diner";
