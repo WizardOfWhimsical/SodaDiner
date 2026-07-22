@@ -37,7 +37,7 @@ if (data) {
   }
 }
 
-function renderDiner({ name, location, sodas }: Diner): void {
+function renderDiner({ name, location, sodas }: Diner) {
   const titleEl = getElById("title");
   const nameEl = getElById("name");
   const locationEl = getElById("location");
@@ -49,7 +49,7 @@ function renderDiner({ name, location, sodas }: Diner): void {
   renderDinerSodas(sodas);
 }
 
-function renderDinerSodas({ sodas }: string | string[]) {
+function renderDinerSodas({ sodas }: Diner) {
   const sodasDiv = getElById("sodas");
 
   if (sodas.length === 0) {
